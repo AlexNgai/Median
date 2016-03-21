@@ -2,6 +2,9 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
 
+//var global = require('./global.js');
+//var default = require('./default.js');
+
 //var Routes = require('./routes');
 
 var HomeContainer = require('./react_components/containers/homeContainer.js');

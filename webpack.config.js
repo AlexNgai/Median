@@ -2,7 +2,8 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        test: "./app/js/test.js"
+        //test: "./app/js/test.js"
+        median: "./app/js/appEntry.js"
     },
     output: {
         path: __dirname + "/app/js/build",
