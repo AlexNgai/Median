@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 
 //var $ = require('jquery');
 
-var MainRouter = require('./react_components/main-router.js');
+var MainRouter = require('main-router.js');
 
 window.onload = function() {
 
@@ -12,5 +12,8 @@ window.onload = function() {
 	ReactDOM.render( <MainRouter />,
 	    document.getElementById( 'app-container' )
 	);
+
+	//render side nav
+	//render content panel
 
 }

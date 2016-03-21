@@ -1,27 +1,42 @@
-var React = require('react');
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
+import React from 'react'
+import { hashHistory, Router, Route } from 'react-router'
 
-var history = ReactRouter.hashHistory;
-              //browserHistory
-/*var MatchScreen = require('./react_screens/matchScreen.js');
-var SettingsScreen = require('./react_screens/settingsScreen.js');*/
-var HomeScreen = require('./screens/homeScreen.js');
+import MainLayout from './layout/mainLayout'
+import LandingLayout from './layout/landingLayout'
+
+var HomeScreen = require('screens/homeScreen.js');
+var ChatScreen = require('screens/chatScreen.js');
+var PatientScreen = require('screens/patientScreen.js');
 
 var MainRouter = React.createClass({
 
 	render: function(){
 		return (
 
-			<Router className="router" history={history}>
-				<Route path="/" 
-          component={HomeScreen}></Route>
+			<Router className="router" history={hashHistory}>
 				
-        <Route path="/profile-builder" 
-          component={HomeScreen}></Route>
+                <Route component={LandingLayout}>
+                    <Route path="/" 
+                        component={HomeScreen}></Route>
+                    <Route path="signup" 
+                        component={HomeScreen}></Route>
+                    <Route path="about" 
+                        component={HomeScreen}></Route>
+                </Route>
+
+                <Route component={MainLayout}>
+                 
+                    <Route path="chat" 
+                        component={ChatScreen}></Route>
+
+                    <Route path="patient" 
+                        component={PatientScreen}></Route>
+               
+                    <Route path="search" 
+                        component={ChatScreen}></Route>
+
+                </Route>
 			</Router>	
-	
 		);
 	}
 
