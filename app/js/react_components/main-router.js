@@ -1,12 +1,12 @@
 import React from 'react'
 import { hashHistory, Router, Route } from 'react-router'
 
-import MainLayout from './layout/mainLayout'
-import LandingLayout from './layout/landingLayout'
+import MainLayout from 'layout/mainLayout'
+import LandingLayout from 'layout/landingLayout'
 
-var HomeScreen = require('screens/homeScreen.js');
-var ChatScreen = require('screens/chatScreen.js');
-var PatientScreen = require('screens/patientScreen.js');
+import HomeScreen from 'screens/homeScreen.js'
+import ChatScreen from 'screens/chatScreen.js'
+import PatientScreen from 'screens/patientScreen.js'
 
 var MainRouter = React.createClass({
 
@@ -29,7 +29,10 @@ var MainRouter = React.createClass({
                     <Route path="chat" 
                         component={ChatScreen}></Route>
 
-                    <Route path="patient" 
+                    <Route path="chat/:channelID" 
+                        component={ChatScreen}></Route>
+
+                    <Route path="patient/:patientID" 
                         component={PatientScreen}></Route>
                
                     <Route path="search" 

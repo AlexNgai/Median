@@ -1,0 +1,47 @@
+
+@import './../variables/themeVars.scss';
+
+header
+{
+        height: 53px;
+        position: fixed;
+        z-index: 100;
+        /*min-width: 8in;*/
+        width: 100%;
+
+
+        #team-menu 
+        {
+                /*height: 61px;
+                z-index: 50;
+                border-bottom-width: 1px;
+                font-size: 1rem;
+                font-weight: 900;
+                padding: 0 1rem;
+                color: #fff;
+                width: 220px;
+                height: 72px;
+                line-height: 72px;
+                background: #4d394b;
+                border-bottom: 2px solid #4d394b;
+                float: left;
+                cursor: pointer;
+                position: relative;*/
+
+                .team-name-container
+                {
+                        color: $primary-color;
+                }
+
+                .presence-container
+                {
+                        color: green;
+                }
+        }
+
+}
+
+main
+{
+        margin-top: 53px;
+}

@@ -1,0 +1,17 @@
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+	position: relative;
+
+	height: 100%;
+    width: 100%;
+    font-size: 1pc;
+    line-height: 1rem;
+    background: #fff;
+    padding: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
