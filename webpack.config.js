@@ -6,6 +6,9 @@ var path = require('path');
 var PROD = false;
 
 module.exports = {
+    
+    devtool: 'source-map',
+
     entry: {
         //test: "./app/js/test.js"
         median: "./app/js/appEntry.js"

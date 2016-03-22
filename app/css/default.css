@@ -15,3 +15,30 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
 }
+
+
+header, main, footer {
+    padding-left: 240px;
+}
+
+@media only screen and (max-width : 992px) {
+header, main, footer {
+    padding-left: 0;
+}
+}
+
+.full-width{
+    width: 100%;
+}
+
+#banner{
+    width: 100%;
+    background-color: #E8AC3C;
+    height: 50px;
+}
+
+.topic-divider{
+    flex: 0 0 auto;
+    padding: 0 .4rem;
+    color: #e8e8e8;
+}
