@@ -5,43 +5,32 @@ var Link = ReactRouter.Link;
 
 require('layout/chatScreen.scss');
 
+var ChannelHeader = require('layout/channelHeader.js');
+var ChannelFooter = require('layout/channelFooter.js');
+
 var ChatScreen = React.createClass({
     
 	
     render: function(){
         return (
-        <div>
-        	<div className="channel-header">
-
-        		<div className="channel-messages-header">
-
-        			<div className="channel-title">
-        				<h2 className="channel-name">#general</h2>
-
-        				<div className="channel-info">
-        					<span>1 member</span>
-        					<span className="topic-divider">|</span>
-        					<span>Description string</span>
-        				</div>
-        			</div>
-
-        			<div className="channel-title-actions">
-
-        			</div>
-        		</div>
-        	
-        		<div className="flex-header">
-
-        		</div>
-
-        	</div>
+        <div className="screen-content">
+        	<ChannelHeader />
 
         	<div className="channel-content">
         	chat screen
+
+                <a className="btn" onClick={this.showToast}>Toast!</a>
+
         	</div>
+
+            <ChannelFooter />
 
         </div>
     	);
+    },
+
+    showToast: function(){
+        Materialize.toast('I am a toast', 4000);
     }
     
 });

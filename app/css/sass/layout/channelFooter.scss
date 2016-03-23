@@ -1,0 +1,54 @@
+
+@import './../variables/themeVars.scss';
+
+.channel-footer
+{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	min-height: 80px;
+	width: 100%;
+
+	#footer-dropdown
+	{
+		top: -160px !important;
+	}
+
+	.footer-input-container
+	{
+		margin: 20px;
+		display: flex;
+		border: 2px solid $border-gray;
+		border-radius: 15px;
+    		align-items: center;
+
+    		padding: 5px;
+
+		#footer-textarea
+		{
+			width: 100%;
+			display: inline-block;
+
+			border: none;
+			border-top-right-radius: 15px;
+			bordre-bottom-right-radius: 15px;
+		}
+	}	
+
+}
+
+
+.footer-btn-container
+{
+	/*background-color: $primary-salmon;*/
+
+	.footer-btn
+	{
+		font-size: 30px;
+		width: 40px;
+		color: white;
+		text-align: center;
+
+		color: $primary-salmon;
+	}
+}

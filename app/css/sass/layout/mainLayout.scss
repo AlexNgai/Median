@@ -31,6 +31,11 @@ main
         margin-top: 53px;
 }*/
 
+main 
+{
+        flex: 1 0 auto;
+}
+
 .mh-side-nav
 {
         background-color: #2C2F42;
@@ -96,7 +101,7 @@ main
                 font-weight: 700;
                 float: left;
                 width: $side-nav-width;
-                height: 4rem;
+                height: 80px;
                 padding: 1.4rem 1rem 0;
                 position: fixed;
                 bottom: 0;

@@ -57,7 +57,8 @@ var MainLayout = React.createClass({
                         User
                     </div>
                 </ul>
-                <a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only"><i className="fa fa-bars"></i> Menu</a>
+                
+                {/*<a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only"><i className="fa fa-bars"></i> Menu</a>*/}
    
             </header>
 

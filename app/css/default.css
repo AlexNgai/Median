@@ -21,10 +21,27 @@ header, main, footer {
     padding-left: 240px;
 }
 
+
+
 @media only screen and (max-width : 992px) {
 header, main, footer {
     padding-left: 0;
 }
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/font/montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/font/montserrat/Montserrat-Bold.ttf');
+    font-weight: bold;
+}
+
+.app, #app-container, main{
+    height: 100%;
 }
 
 .full-width{
@@ -42,3 +59,43 @@ header, main, footer {
     padding: 0 .4rem;
     color: #e8e8e8;
 }
+
+.hover-icon:hover{
+    color: #51E2C3;
+    cursor: pointer;
+    transition: color .3s ease;
+}
+
+/*.action-icon{
+    font-size: 20px;
+    
+    background-color: #3B3E51;
+    margin: 0 10px;
+
+    margin: 0 10px;
+    min-width: 30px;
+    min-height: 30px;
+    line-height: 30px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 100%;
+
+    height: 30px;
+    width: 30px;
+    flex: 0 0 auto;
+
+    padding: 5px 10px;
+    border-radius: 100%;
+}*/
+
+/*.action-icon {
+    background: #3B3E51;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    vertical-align: middle;
+    padding: 10px;
+}*/
