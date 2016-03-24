@@ -9,7 +9,7 @@ var ChannelFooter = React.createClass({
 
         	<div className="channel-footer">
 
-                <div className="footer-input-container">
+                <div id="footer-text-container" className="footer-input-container">
                     <div className="footer-btn-container">
                     <a className="footer-btn waves-effect waves-dark dropdown-button"
                         data-activates='footer-dropdown'>
@@ -17,7 +17,7 @@ var ChannelFooter = React.createClass({
                     </a>
                     </div>
 
-                    <textarea id="footer-textarea" placeholder="text here"/>
+                    <textarea id="footer-textarea" placeholder="Type a message..."/>
                 </div>
 
 
@@ -41,8 +41,28 @@ var ChannelFooter = React.createClass({
             hover: false, 
             belowOrigin: false
         });
+
+        /*var footer_input = $('#footer-textarea'),
+            hiddenDiv = $(document.createElement('div')),
+            content = null;
+
+        //footer_input.addClass('txtstuff');
+        hiddenDiv.addClass('hiddendiv common');
+
+        $('#footer-text-container').append(hiddenDiv);
+
+        footer_input.on('keyup', function () {
+
+            content = $(this).val();
+
+            content = content.replace(/\n/g, '<br>');
+            hiddenDiv.html(content + '<br class="lbr">');
+
+            $(this).css('height', hiddenDiv.height());
+
+        });*/
     }
     
 });
 
-module.exports = ChannelFooter; 
+module.exports = ChannelFooter;

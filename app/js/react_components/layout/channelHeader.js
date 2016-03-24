@@ -14,7 +14,7 @@ var ChannelHeader = React.createClass({
         		<div className="channel-messages-header">
 
         			<div className="channel-title">
-        				<h2 className="channel-name">#general</h2>
+        				<h2 className="channel-name">#general2</h2>
 
         				<div className="channel-info">
         					<span>1 member</span>

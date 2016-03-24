@@ -11,7 +11,7 @@
 
 	#footer-dropdown
 	{
-		top: -160px !important;
+		top: -140px !important;
 	}
 
 	.footer-input-container
@@ -31,7 +31,21 @@
 
 			border: none;
 			border-top-right-radius: 15px;
-			bordre-bottom-right-radius: 15px;
+			border-bottom-right-radius: 15px;
+
+			max-height: 200px;
+			min-height: 45px;
+			resize: none;
+    			overflow-y: auto;
+
+    			font-size: 14px;
+    			font-family: $font-stack;
+
+    			white-space: pre-wrap;
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+
+			padding: 5px;
 		}
 	}	
 
@@ -51,4 +65,31 @@
 
 		color: $primary-salmon;
 	}
+}
+
+.txtstuff {
+    resize: none;
+    overflow: hidden;
+}
+
+.hiddendiv {
+    display: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word; /* future version of deprecated 'word-wrap' */
+}
+
+/* the styles for 'commmon' are applied to both the textarea and the hidden clone */
+/* these must be the same for both */
+.common {
+    width: 100%;
+    min-height: 45px;
+    font-size: 14px;
+    overflow: hidden;
+    max-height: 200px;
+    font-family: $font-stack;
+}
+
+.lbr {
+    line-height: 3px;
 }

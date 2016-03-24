@@ -8,7 +8,7 @@ var HomeScreen = React.createClass({
 	
     render: function(){
         return <div>
-        	home screen
+        	home screen sfew
         </div>
     }
     

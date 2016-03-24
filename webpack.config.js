@@ -8,14 +8,15 @@ var PROD = false;
 module.exports = {
     
     devtool: 'source-map',
-
+    watch: true,
     entry: {
         //test: "./app/js/test.js"
         median: "./app/js/appEntry.js"
     },
     output: {
-        path: __dirname + "/app/js/build",
-        filename: "[name].build.js"
+        //path: __dirname + "/app/js/build",
+        //filename: "[name].build.js"
+        filename: "median.build.js"
     },
     module: {
         loaders: [
@@ -40,7 +41,7 @@ module.exports = {
     },
     devServer: {
       headers: { "Access-Control-Allow-Origin": "*" },
-      contentBase: "app"
+      contentBase: "./app"
     },
 
     plugins: (
