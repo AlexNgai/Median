@@ -3,11 +3,13 @@
 
 .channel-footer
 {
-	position: absolute;
+	/*position: absolute;
 	bottom: 0px;
-	left: 0px;
+	left: 0px;*/
 	min-height: 80px;
 	width: 100%;
+	position: relative;
+
 
 	#footer-dropdown
 	{
