@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 
 require('layout/mainLayout.scss');
 
-var Sidebar = require('layout/sidebar.js');
+var Sidebar = require('layout/sidebar.jsx');
 
 var MainLayout = React.createClass({
 

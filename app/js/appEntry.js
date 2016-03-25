@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 
 //var $ = require('jquery');
 
-var MainRouter = require('main-router.js');
+var MainRouter = require('main-router.jsx');
 
 window.onload = function() {
 

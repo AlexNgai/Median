@@ -68,21 +68,46 @@
 
         .mh-side-nav-footer
         {
-                border-top: 1px solid $side-nav-border-color;
+                /* border-top: 1px solid $side-nav-border-color; */
                 cursor: pointer;
                 font-size: 14px;
                 display: flex;
                 align-items: center;
-                text-align: center;
+                /* text-align: center; */
                 min-height: 80px;
+                background-color: $side-nav-background-logo;
                 /*position: fixed;
                 bottom: 0;
                 left: 0;*/
 
                 .mh-nav-footer-profile
                 {
-                        text-align: center;
+                        /* text-align: center; */
                         width: 100%;
+                        display: flex;
+                        align-items: center;
+
+                        .mh-avatar
+                        {
+                                margin-left: 20px;
+                        }
+
+                        .mh-nav-footer-username
+                        {
+                                font-size: 16px;
+                                overflow: ellipsis;
+                                flex: 1;
+                                margin-left: 10px;
+                        }
+
+                        .mh-nav-footer-dropdown
+                        {
+                                background:none;
+                                border:none;
+                                font-size: 20px;
+                                color:white;
+                                margin-right: 10px;
+                        }
                 }
         }
 
@@ -115,3 +140,69 @@
         }
 }
 
+.mh-side-nav-header
+{
+        padding: 10px 0px 20px 0px;
+        display: flex;
+        align-items: center;
+
+        h3
+        {
+                font-size: 16px;
+                font-family: $font-header;
+                flex: 1;
+        }
+
+        i
+        {
+                font-size: 30px;
+                color: $aqua-highlight;
+        }
+
+        i:hover
+        {
+                color: white;
+                transition: color .3s ease;
+        }
+}
+
+.mh-side-nav-channel-container
+{
+        padding: 20px;  
+
+        .mh-side-nav-channel
+        {
+                padding: 5px 0px;
+                color: $font-gray;
+                display: flex;
+                align-items: center;
+        
+                .channel-name
+                {
+                        flex: 1;
+                }
+        }
+
+        .mh-side-nav-channel:hover
+        {
+                color: white;
+                transition: color .3s ease;
+        }
+
+        .mh-side-nav-channel.active
+        {
+                color: white;
+        }
+}
+
+.mh-badge
+{
+        color: white;
+        padding: 3px 6px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: $primary-salmon;
+        background-color: white;
+        border-radius: 4px;
+}

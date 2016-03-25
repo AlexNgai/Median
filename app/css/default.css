@@ -40,12 +40,24 @@ header, main, footer {
     font-weight: bold;
 }
 
+h1,h2,h3,h4,h5,p{
+    margin: 0px;
+}
+
 .app, #app-container, main{
     height: 100%;
 }
 
 .full-width{
     width: 100%;
+}
+
+.clear{
+    clear: both;
+}
+
+.clickable{
+    cursor: pointer;
 }
 
 #banner{
@@ -124,4 +136,16 @@ header, main, footer {
 {
     border-radius: 10px;
     background-color: #BBB;
+}
+
+
+
+/*GENERAL CLASSES*/
+.img-circle {
+    border-radius: 50%;
+}
+
+.nostyle-btn {
+    background:none;
+    border:none;
 }

@@ -11,7 +11,7 @@ var ChannelFooter = React.createClass({
 
                 <div id="footer-text-container" className="footer-input-container">
                     <div className="footer-btn-container">
-                    <a className="footer-btn waves-effect waves-dark dropdown-button"
+                    <a id="chat-footer-dropdown-btn" className="footer-btn waves-effect waves-dark dropdown-button"
                         data-activates='footer-dropdown'>
                         <i className="fa fa-arrow-circle-o-up"></i>
                     </a>
@@ -34,7 +34,7 @@ var ChannelFooter = React.createClass({
 
     componentDidMount: function(){
 
-        $('.dropdown-button').dropdown({
+        $('#chat-footer-dropdown-btn').dropdown({
             inDuration: 300,
             outDuration: 225,
             constrain_width: false, 

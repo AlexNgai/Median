@@ -3,7 +3,8 @@ import {Link} from 'react-router'
 
 require('layout/sidebar.scss');
 
-var Avatar = require('general/avatarGen.js');
+var ChannelContainer = require('containers/navChannelContainer.jsx');
+var Avatar = require('general/avatarGen.jsx');
 
 var Sidebar = React.createClass({
 	
@@ -36,36 +37,57 @@ var Sidebar = React.createClass({
                         </a>
                     </div>
 
-
-
-
                     <div className="mh-side-nav-content">
 
-                        <a href="#!">First Sidebar Link</a>
+                        {/*CHANNEL LIST*/}
+                        <ChannelContainer />
+
+                        {/*PATIENT LIST*/}
+
+                        {/*TEAM LIST*/}
+
+
+
+                        {/*<a href="#!">First Sidebar Link</a>
                         <a href="#!">Second Sidebar Link</a>
                         <Link to="/chat" activeClassName="active">Chat</Link>
                         <Link to="/patient" activeClassName="active">Patient</Link>
 
-                        <div>Hello world</div>
+                        <div>Hello world</div>*/}
                     </div>
 
                     <div className="mh-side-nav-footer">
                         <div className="mh-nav-footer-profile">
-                            <span>
-                                <Avatar />
-                                User1
+                            <Avatar size={40} name="Alex Ngai" circular={true} className="mh-nav-footer-avatar"/>
+                            <span className="mh-nav-footer-username">
+                                Alex Ngai
                             </span>
-                            <span>
-                                icon
-                            </span>
+                            <button id="mh-nav-footer-dropdown-btn" className="mh-nav-footer-dropdown browser-default dropdown-button"
+                                data-activates='mh-nav-footer-dropdown' >
+                                <i className="fa fa-chevron-up"></i>
+                            </button>
                         </div>
                     </div>
+
                 </div>
                 
                 {/*<a href="#" data-activates="slide-out" className="button-collapse hide-on-large-only"><i className="fa fa-bars"></i> Menu</a>*/}
    
             </header>
     	);
+    },
+
+    componentDidMount: function(){
+
+        /*$("mh-nav-footer-dropdown-btn").dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrain_width: false, 
+            hover: false, 
+            belowOrigin: false
+        });*/
+
+
     }
 
 

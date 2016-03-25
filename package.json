@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --inline",
+    "start": "webpack-dev-server --inline --history-api-fallback",
     "production": "webpack -p"
   },
   "repository": {
@@ -28,6 +28,8 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.1",
+    "redux": "^3.3.1",
+    "underscore": "^1.8.3",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
