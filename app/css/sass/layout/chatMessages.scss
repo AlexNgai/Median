@@ -1,0 +1,37 @@
+@import './../variables/themeVars.scss';
+
+.chat-msg-container
+{
+	
+
+	.chat-msg
+	{
+		padding: 5px 0px;
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+
+        .mh-avatar
+        {
+        	margin-right: 15px;
+        	border-radius: 5px;
+        }
+
+        .chat-msg-userinfo
+        {
+        	margin-bottom: 10px;
+
+        	.user-name
+        	{
+        		font-size: 16px;
+        		margin-right: 10px;
+        	}
+
+        	.msg-time
+        	{
+        		color: $font-gray;
+        	}
+        }
+	}
+
+}

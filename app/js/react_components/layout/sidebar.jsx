@@ -4,6 +4,9 @@ import {Link} from 'react-router'
 require('layout/sidebar.scss');
 
 var ChannelContainer = require('containers/navChannelContainer.jsx');
+var PatientContainer = require('containers/navPatientContainer.jsx');
+var TeamContainer = require('containers/navTeamContainer.jsx');
+
 var Avatar = require('general/avatarGen.jsx');
 
 var Sidebar = React.createClass({
@@ -37,12 +40,16 @@ var Sidebar = React.createClass({
                         </a>
                     </div>
 
-                    <div className="mh-side-nav-content">
+                    <div className="mh-side-nav-content md-scroll">
 
                         {/*CHANNEL LIST*/}
                         <ChannelContainer />
 
                         {/*PATIENT LIST*/}
+                        <PatientContainer />
+
+                        <TeamContainer />
+                        
 
                         {/*TEAM LIST*/}
 
@@ -58,7 +65,7 @@ var Sidebar = React.createClass({
 
                     <div className="mh-side-nav-footer">
                         <div className="mh-nav-footer-profile">
-                            <Avatar size={40} name="Alex Ngai" circular={true} className="mh-nav-footer-avatar"/>
+                            <Avatar size={40} name="Alex Ngai" circular={true} className="mh-nav-footer-avatar" id="me"/>
                             <span className="mh-nav-footer-username">
                                 Alex Ngai
                             </span>

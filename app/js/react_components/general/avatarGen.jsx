@@ -7,7 +7,8 @@ var AvatarGen = React.createClass({
 			size: 30,
 			imgUrl: "",
 			name: "",
-			circular: false
+			circular: false,
+			id: 0
 		}
 	},
 
@@ -19,7 +20,7 @@ var AvatarGen = React.createClass({
     		avatar = (<img src={this.props.imgUrl} width={this.props.size} height={this.props.size} 
     			className={"mh-avatar" + ((this.props.circular)?" img-circle":"")}/>);
     	} else {
-    		avatar = (<canvas id="user-icon" width={this.props.size} height={this.props.size} 
+    		avatar = (<canvas id={"user-icon-" + this.props.id} width={this.props.size} height={this.props.size} 
     			className={"mh-avatar" +((this.props.circular)?" img-circle":"")}></canvas>);
     	}
 
@@ -54,7 +55,7 @@ var AvatarGen = React.createClass({
 		var charIndex = initials.charCodeAt(0) - 65,
 		    colourIndex = charIndex % 19;
 
-		var canvas = document.getElementById("user-icon");
+		var canvas = document.getElementById("user-icon-" + this.props.id);
 		var context = canvas.getContext("2d");
 
 		var canvasWidth = $(canvas).attr("width"),
@@ -72,7 +73,7 @@ var AvatarGen = React.createClass({
 
 		context.fillStyle = colours[colourIndex];
 		context.fillRect (0, 0, canvas.width, canvas.height);
-		context.font = Math.round(this.props.size/2) + "px Helvetica";
+		context.font = Math.round(this.props.size/2.2) + "px Montserrat, Helvetica";
 		context.textAlign = "center";
 		context.fillStyle = "#FFF";
 		context.fillText(initials, canvasCssWidth / 2, canvasCssHeight / 1.5);

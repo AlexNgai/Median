@@ -63,7 +63,8 @@
 
         .mh-side-nav-content
         {
-                flex: 1
+                flex: 1;
+                overflow-y: auto;
         }
 
         .mh-side-nav-footer
@@ -155,13 +156,13 @@
 
         i
         {
-                font-size: 30px;
-                color: $aqua-highlight;
+                font-size: 24px;
+                color: $aqua-muted;
         }
 
         i:hover
         {
-                color: white;
+                color: $aqua-highlight;
                 transition: color .3s ease;
         }
 }
@@ -181,6 +182,22 @@
                 {
                         flex: 1;
                 }
+
+                .team-name
+                {
+                        flex: 1;
+
+                        p
+                        {
+                                margin: 5px 0px;
+                        }
+
+                        .user-status
+                        {
+                                color: $font-gray;
+                                font-size: 14px;
+                        }
+                }
         }
 
         .mh-side-nav-channel:hover
@@ -193,6 +210,19 @@
         {
                 color: white;
         }
+
+        .mh-avatar
+        {
+                margin-right: 10px;
+        }
+
+        .nav-option-more
+        {
+                margin-top: 15px;
+                text-decoration: underline;
+                color: $font-gray;
+                cursor: pointer;
+        }
 }
 
 .mh-badge
@@ -202,7 +232,8 @@
         text-align: center;
         font-size: 14px;
         font-weight: bold;
-        color: $primary-salmon;
-        background-color: white;
+        color: white;
+        background-color: $primary-periwinkle;
         border-radius: 4px;
+        /* animation: big-wiggle .1s infinite alternate; */
 }

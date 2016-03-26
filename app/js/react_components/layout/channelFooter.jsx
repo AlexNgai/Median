@@ -11,13 +11,19 @@ var ChannelFooter = React.createClass({
 
                 <div id="footer-text-container" className="footer-input-container">
                     <div className="footer-btn-container">
-                    <a id="chat-footer-dropdown-btn" className="footer-btn waves-effect waves-dark dropdown-button"
-                        data-activates='footer-dropdown'>
-                        <i className="fa fa-arrow-circle-o-up"></i>
-                    </a>
+                        <a id="chat-footer-dropdown-btn" className="footer-btn waves-effect waves-dark dropdown-button"
+                            data-activates='footer-dropdown'>
+                            <i className="fa fa-arrow-circle-o-up"></i>
+                        </a>
                     </div>
 
                     <textarea id="footer-textarea" placeholder="Type a message..."/>
+
+                    {/*<div className="footer-btn-container">
+                                            <a className="footer-btn waves-effect waves-dark">
+                                                <i className="fa fa-pencil-square-o"></i>
+                                            </a>
+                                        </div>*/}
                 </div>
 
 

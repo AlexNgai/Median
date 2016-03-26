@@ -1,6 +1,6 @@
 var React = require('react');
 
-var ChannelContainer = React.createClass({
+var PatientContainer = React.createClass({
 
 	getDefaultProps: function(){
 		return {
@@ -20,6 +20,16 @@ var ChannelContainer = React.createClass({
 					notif: 1,
 					id: 3
 				},
+				{
+					name: "test1",
+					notif: 0,
+					id: 4
+				},
+				{
+					name: "test2",
+					notif: 1,
+					id: 5
+				},
 
 			], //in sorted order?
 			currentChannel: 2,
@@ -33,7 +43,7 @@ var ChannelContainer = React.createClass({
         return (
         	<div className="mh-side-nav-channel-container">
         		<div className="mh-side-nav-header">
-        			<h3>CHANNEL</h3>
+        			<h3>PATIENT</h3>
         			<i className="fa fa-plus clickable mh-side-nav-add-btn"></i>
         		</div>
         		{this.renderChannels()}
@@ -45,7 +55,7 @@ var ChannelContainer = React.createClass({
     	var rows = [];
     	for (var i=0; i<Math.min(this.props.channels.length,4); i++){
     		var channel = this.props.channels[i];
-    		rows.push(<ChannelListElement key={channel.id} data={channel} isActive={this.props.currentChannel == channel.id} />)
+    		rows.push(<PatientListElement key={channel.id} data={channel} isActive={this.props.currentChannel == channel.id} />)
     	}
 
     	if (this.props.channels.length > 4){
@@ -65,7 +75,7 @@ var ChannelContainer = React.createClass({
 
 });
 
-var ChannelListElement = React.createClass({
+var PatientListElement = React.createClass({
 
 	render: function(){
 
@@ -76,7 +86,7 @@ var ChannelListElement = React.createClass({
 
 		return (
 			<div className={"mh-side-nav-channel" + ((this.props.isActive)?" active":"")}>
-				<span className="clickable channel-name">#{this.props.data.name}</span>
+				<span className="clickable channel-name">{this.props.data.name}</span>
 				{badge}
 			</div>
 		);
@@ -84,5 +94,4 @@ var ChannelListElement = React.createClass({
 });
 
 
-module.exports = ChannelContainer;
-
+module.exports = PatientContainer;

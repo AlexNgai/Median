@@ -28,7 +28,7 @@ var ChannelHeader = React.createClass({
         			</div>
         		</div>
         	
-        		<div className="flex-header">
+        		<div className="flex-header hide-on-med-and-down">
                     <div className="flex-actions">
                         <div className="search-wrapper card">
                             <input id="search" />
