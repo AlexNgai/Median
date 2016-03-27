@@ -1,9 +1,11 @@
 {
-  "firebase": "amber-inferno-4829",
-  "public": "public",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**"
-  ]
+	"firebase": "amber-inferno-4829",
+	"public": "app",
+	"ignore": [
+	"firebase.json",
+	"**/.*",
+	"**/node_modules/**"
+	]
+  	
+  	
 }

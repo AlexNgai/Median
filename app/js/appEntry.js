@@ -5,9 +5,13 @@ var ReactDOM = require('react-dom');
 
 var MainRouter = require('main-router.jsx');
 
+var FireUtils = require('utils/firebaseUtils.js');
+
 window.onload = function() {
 
 	console.log("Welcome to Median!");
+
+	FireUtils.init();
 
 	ReactDOM.render( <MainRouter />,
 	    document.getElementById( 'app-container' )

@@ -1,14 +1,23 @@
 var webpack = require('webpack');
 var path = require('path');
 
+var PROD = false;
+
+process.argv.forEach(function (val, index, array) {
+    //console.log(index + ': ' + val);
+    if (val == "--build-production")
+    {
+        PROD = true;
+        console.log("BUILDING PRODUCTION");
+    }
+});
 
 //var PROD = JSON.parse(process.env.PROD_ENV || '0');
-var PROD = false;
 
 module.exports = {
     
-    devtool: 'source-map',
-    watch: true,
+    devtool: ((!PROD)?'source-map':''),
+    watch: !PROD,
     entry: {
         //test: "./app/js/test.js"
         median: "./app/js/appEntry.js"
@@ -16,7 +25,7 @@ module.exports = {
     output: {
         //path: __dirname + "/app/js/build",
         //filename: "[name].build.js"
-        filename: "median.build.js"
+        filename: ((PROD)? (__dirname +"/app/"):"") + "median.build.js"
     },
     module: {
         loaders: [

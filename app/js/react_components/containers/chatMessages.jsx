@@ -63,8 +63,6 @@ var ChatMessages = React.createClass({
 	},
 
     render: function(){
-       
-    	console.log(TimeUtils.formatAMPM(23523));
 
         return (
         	<div className="chat-msg-container">

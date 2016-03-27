@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --inline --history-api-fallback",
-    "production": "webpack -p"
+    "production": "webpack --build-production"
   },
   "repository": {
     "type": "git",

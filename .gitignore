@@ -48,3 +48,4 @@ Temporary Items
 
 app/js/build/*
 node_modules/*
+public/*
