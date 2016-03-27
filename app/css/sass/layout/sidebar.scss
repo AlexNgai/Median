@@ -143,7 +143,7 @@
 
 .mh-side-nav-header
 {
-        padding: 10px 0px 20px 0px;
+        padding: 10px 20px 10px 20px;
         display: flex;
         align-items: center;
 
@@ -169,7 +169,7 @@
 
 .mh-side-nav-channel-container
 {
-        padding: 20px;  
+        padding: 20px 0px;  
 
         .mh-side-nav-channel
         {
@@ -177,6 +177,7 @@
                 color: $font-gray;
                 display: flex;
                 align-items: center;
+                padding: 5px 20px;
         
                 .channel-name
                 {
@@ -204,11 +205,13 @@
         {
                 color: white;
                 transition: color .3s ease;
+                background-color: $ash-blue-light;
         }
 
         .mh-side-nav-channel.active
         {
                 color: white;
+                background-color: $ash-blue-light;
         }
 
         .mh-avatar
@@ -222,6 +225,7 @@
                 text-decoration: underline;
                 color: $font-gray;
                 cursor: pointer;
+                padding: 0px 20px;
         }
 }
 

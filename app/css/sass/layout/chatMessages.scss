@@ -4,12 +4,13 @@
 {
 	
 
-	.chat-msg
+	.chat-msg-group
 	{
 		padding: 5px 0px;
         display: flex;
         align-items: flex-start;
         margin-bottom: 15px;
+        width: 100%;
 
         .mh-avatar
         {
@@ -32,6 +33,76 @@
         		color: $font-gray;
         	}
         }
-	}
 
+        .chat-msg
+        {
+        	padding: 8px 0px;
+        	width: 100%;
+        	position: relative;
+
+        	.chat-msg-actions
+	        {
+	        	display:none;
+	        	position: absolute;
+	        	padding: 10px 10px;
+	        	border: 1px solid $border-gray;
+	        	border-radius: 5px;
+	        	background-color: white;
+	        	z-index: 5;
+	        	top: -15px;
+	        	right: 10px;
+
+	        	span, a
+	        	{
+	        		padding: 0px 5px;
+	        		min-width: 30px;
+	        		text-align: center;
+	        	}
+
+	        	span:not(:last-child), a:not(:last-child)
+	        	{
+	        		border-right: 1px solid $border-gray;
+	        	}
+
+	        }
+        }
+
+        .chat-msg:hover
+        {
+        	background-color: $primary-cream;
+
+        	.chat-msg-actions
+        	{
+        		display: block;
+        	}
+        }
+    }
+}
+
+.msg-date
+{
+    background: none;
+    text-align: center;
+    color: $font-gray;
+    border:none;
+    box-shadow: none;
+    /* border-bottom: 1px solid $font-light-gray; */
+    padding: 7px 0px 0px 0px;
+    margin: 10px 0px;
+    position: relative;
+
+    .separator 
+    {
+    	border-top: 1px solid $font-light-gray;
+    }
+
+    strong 
+    {
+    	position: relative;
+    	margin: 0 auto;
+    	background: white;
+    	padding: 10px 10px;
+    	border-radius: .25rem;
+    	top: -16px;
+    }
 }
