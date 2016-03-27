@@ -12,6 +12,9 @@ var MainLayout = require('layout/mainLayout.jsx');
 var LandingLayout = require('layout/landingLayout.jsx');
 
 var HomeScreen = require('screens/homeScreen.jsx');
+var SignupScreen = require('screens/signupScreen.jsx');
+var AboutScreen = require('screens/aboutScreen.jsx');
+
 var ChatScreen = require('screens/chatScreen.jsx');
 var PatientScreen = require('screens/patientScreen.jsx');
 
@@ -26,9 +29,9 @@ var MainRouter = React.createClass({
                     <Route path="/" 
                         component={HomeScreen}></Route>
                     <Route path="signup" 
-                        component={HomeScreen}></Route>
+                        component={SignupScreen}></Route>
                     <Route path="about" 
-                        component={HomeScreen}></Route>
+                        component={AboutScreen}></Route>
                 </Route>
 
                 <Route component={MainLayout}>
@@ -44,7 +47,6 @@ var MainRouter = React.createClass({
                
                     <Route path="search" 
                         component={ChatScreen}></Route>
-
                 </Route>
                 
 			</Router>	

@@ -15,7 +15,7 @@ var ChatMessages = React.createClass({
 				{
 					id: 1,
 					body: "Lorem ipsum dolor sit amet, ut dolorem gloriatur pro, mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est, qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
-					date: 2342523,
+					date: 23523,
 					user: {
 						name: "Jser 1",
 						id: 1
@@ -24,7 +24,7 @@ var ChatMessages = React.createClass({
 				{
 					id: 2,
 					body: " qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
-					date: 2342523,
+					date: 22523,
 					user: {
 						name: "fwefer 1",
 						id: 2
@@ -33,7 +33,7 @@ var ChatMessages = React.createClass({
 				{
 					id: 3,
 					body: "mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est. Omnesque tincidunt adipiscing nam ea.",
-					date: 2342523,
+					date: 23423,
 					user: {
 						name: "fwefer 1",
 						id: 2
@@ -42,7 +42,7 @@ var ChatMessages = React.createClass({
 				{
 					id: 4,
 					body: " qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
-					date: 2342523,
+					date: 33423,
 					user: {
 						name: "fwefer 1",
 						id: 2
@@ -51,7 +51,7 @@ var ChatMessages = React.createClass({
 				{
 					id: 5,
 					body: "mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est. Omnesque tincidunt adipiscing nam ea.",
-					date: 2342523,
+					date: 232524533,
 					user: {
 						name: "Jser 1",
 						id: 1
@@ -63,26 +63,15 @@ var ChatMessages = React.createClass({
 	},
 
     render: function(){
+       
+    	console.log(TimeUtils.formatAMPM(23523));
+
         return (
         	<div className="chat-msg-container">
         		{this.renderMsgGroups()}
     		</div>
     	);
     },
-
- 	renderMsgs: function(){
- 		var rows = [];
-    	for (var i=0; i<this.props.messages.length; i++){
-    		var msg = this.props.messages[i];
-    		rows.push(<ChatMessageItem key={msg.id} data={msg} />)
-    	}
-
-    	if (this.props.messages.length == 0){
-    		//DO SOMETHING HERE FOR EMPTY CHAT
-    	}
-
-    	return rows;
- 	},
 
  	renderMsgGroups: function(){
 
@@ -189,8 +178,6 @@ var ChatMessageGroup = React.createClass({
 	      tIncID++; 
 	    }
 
-	    var msgTime = TimeUtils.formatAMPM(this.props.sendDate);
-
 	    var messageContent = (
 	        <div className="chat-msg-group">
 				<Avatar size={50} name={this.props.sender} circular={false} 
@@ -202,7 +189,7 @@ var ChatMessageGroup = React.createClass({
 							{this.props.sender}
 						</strong>
 
-						<span className="msg-time">{TimeUtils.formatAMPM(this.props.msgSendDate)}</span>
+						<span className="msg-time">{TimeUtils.formatAMPM(this.props.sendDate)}</span>
 					</div>
 
 					{rows}
@@ -230,7 +217,7 @@ var ChatMessageItem = React.createClass({
 	renderMessageActions: function(){
 		return (
 			<div className="chat-msg-actions">
-				<span>1:15AM</span>
+				<span>{TimeUtils.formatAMPM(this.props.data.date)}</span>
 				<a><i className="fa fa-star-o"></i></a>
 				<a><i className="fa fa-pencil-square-o"></i></a>
 				<a><i className="fa fa-ellipsis-v"></i></a>

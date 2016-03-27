@@ -7,8 +7,18 @@ var HomeScreen = React.createClass({
     
 	
     render: function(){
-        return <div>
-        	home screen sfew
+        return <div className="welcome-content">
+        	<div className="row">
+	        	<div className="col s8 offset-s2">
+	        		<h2 className="center-align">
+	        			A messaging app for teams who put robots on Mars!
+	        		</h2>
+	        	</div>
+        	</div>
+
+        	<div className="row center-align">
+        		<Link to="signup" data-word='Get Started!' className="start-button"></Link>
+        	</div>
         </div>
     }
     

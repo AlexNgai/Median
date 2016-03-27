@@ -1,0 +1,103 @@
+@import './../variables/themeVars.scss';
+
+.landing 
+{
+    padding: 0px;
+}
+
+.app-landing 
+{ 
+  	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), url(#{$assetPath}/pug-min.jpg) no-repeat center center fixed; 
+  	background-size: cover;
+  	display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+nav 
+{
+	box-shadow: none;
+	background: none;
+
+	ul
+	{
+		a.active
+		{
+			background-color: $primary-salmon;
+		}
+	}
+
+	.brand-logo img
+	{
+		max-height: 64px;
+	}
+}
+
+footer.page-footer
+{
+	background-color: rgba(0,0,0,.3);
+
+	.footer-copyright
+	{
+		background-color: rgba(0,0,0,.5);
+	}
+}
+
+.landing-content
+{
+	font-family: $font-header;
+}
+
+$s: 10px;
+
+.welcome-content
+{
+	color: white;
+	width: 100%;
+	h2
+	{
+		margin-bottom: 20px;
+		font-size: 40px;
+	}
+
+	.start-button {
+		display: inline-block;
+		margin: auto;
+		width: $s*40;
+		height: $s*8;
+		border: none;
+		background: $aqua-muted;
+		position: relative;
+		overflow: hidden;
+		color: white;
+		line-height: 80px;
+
+		&:before {
+			content: '';
+			background: darken($aqua-highlight, 10%);
+			width: $s*80;
+			height: $s*60;
+			position: absolute;
+			transform: translate($s*-100,$s*-40) rotate(130deg);
+			transition: all 700ms ease;
+		}
+		&:after {
+			content: attr(data-word);
+			color: white;
+			font-size: 2em;
+			position: relative;
+			z-index: 100;
+			transition: all 200ms ease;
+			font-weight: 200;
+		}
+
+		&:hover {
+			&:after {
+				font-size: 2.2em;
+			}
+			&:before {
+				transform: translate($s*-20,$s*-40) rotate(130deg);
+			}
+		}
+	}
+}

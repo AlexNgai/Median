@@ -58,9 +58,10 @@ module.exports = {
             path.resolve('./app'),
             path.resolve('./app/js'),
             path.resolve('./app/css/sass'),
-            path.resolve('./app/js/react_components')
+            path.resolve('./app/js/react_components'),
+            path.resolve('./app/img')
         ],
-        extensions: ['','.js','.jsx','.css','.scss']
+        extensions: ['','.js','.jsx','.css','.scss','.jpg','.png']
     }
 }
 

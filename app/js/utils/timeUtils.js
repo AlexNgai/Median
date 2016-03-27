@@ -43,7 +43,7 @@ TimeUtils.MDFormat = function( timestamp )
     } else if (thisweek.getTime() <= MMDD.getTime()){
         strDate = days[MMDD.getDay()]; 
     } else {
-        strDate = months[MMDD.getMonth()] + "-" + MMDD.getDate();
+        strDate = months[MMDD.getMonth()] + " " + MMDD.getDate();
     }
 
     strDate += " " + TimeUtils.formatAMPM(timestamp);
