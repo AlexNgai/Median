@@ -56,6 +56,51 @@ var ChatMessages = React.createClass({
 						name: "Jser 1",
 						id: 1
 					}
+				},
+				{
+					id: 6,
+					body: "Lorem ipsum dolor sit amet, ut dolorem gloriatur pro, mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est, qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
+					date: 23523,
+					user: {
+						name: "Jser 1",
+						id: 1
+					}
+				},
+				{
+					id: 7,
+					body: " qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
+					date: 22523,
+					user: {
+						name: "fwefer 1",
+						id: 2
+					}
+				},
+				{
+					id: 8,
+					body: "mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est. Omnesque tincidunt adipiscing nam ea.",
+					date: 23423,
+					user: {
+						name: "fwefer 1",
+						id: 2
+					}
+				},
+				{
+					id: 9,
+					body: " qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
+					date: 33423,
+					user: {
+						name: "fwefer 1",
+						id: 2
+					}
+				},
+				{
+					id: 10,
+					body: "mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est. Omnesque tincidunt adipiscing nam ea.",
+					date: 232524533,
+					user: {
+						name: "Jser 1",
+						id: 1
+					}
 				}
 
 			]

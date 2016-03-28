@@ -1,4 +1,5 @@
-var React = require('react');
+import React from 'react'
+import { browserHistory } from 'react-router'
 
 var ChannelContainer = React.createClass({
 
@@ -67,6 +68,11 @@ var ChannelContainer = React.createClass({
 
 var ChannelListElement = React.createClass({
 
+	switchActiveChannel: function(){
+		console.log("switching to channel");
+		browserHistory.push('/chat');
+	},
+
 	render: function(){
 
 		var badge;
@@ -75,7 +81,7 @@ var ChannelListElement = React.createClass({
 		}
 
 		return (
-			<div className={"mh-side-nav-channel" + ((this.props.isActive)?" active":"")}>
+			<div onClick={this.switchActiveChannel} className={"mh-side-nav-channel" + ((this.props.isActive)?" active":"")}>
 				<span className="clickable channel-name">#{this.props.data.name}</span>
 				{badge}
 			</div>

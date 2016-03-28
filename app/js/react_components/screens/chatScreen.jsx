@@ -12,9 +12,9 @@ var ChatMessages = require('containers/chatMessages.jsx');
 
 var ChatScreen = React.createClass({
     
-	getInitialProps: function(){
+	getDefaultProps: function(){
         return {
-            hasSideContent: false
+            hasSideContent: true
         }
     },
 
@@ -35,6 +35,7 @@ var ChatScreen = React.createClass({
                 </div>
 
                 {this.renderSideContent()}
+            );
             </div>
 
         </div>
@@ -42,6 +43,7 @@ var ChatScreen = React.createClass({
     },
 
     renderSideContent: function(){
+        console.log("has side content?", this.props.hasSideContent);
         if (this.props.hasSideContent){
             return (
                 <div className="channel-side-content md-scroll">

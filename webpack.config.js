@@ -14,6 +14,8 @@ process.argv.forEach(function (val, index, array) {
 
 //var PROD = JSON.parse(process.env.PROD_ENV || '0');
 
+var bourbon = require('node-bourbon').includePaths;
+
 module.exports = {
     
     devtool: ((!PROD)?'source-map':''),
@@ -43,7 +45,7 @@ module.exports = {
             // SASS
             {
                 test: /\.scss$/,
-                loader: 'style!css!sass?sourceMap' //adds source map
+                loader: 'style!css!sass?source-map&includePaths[]=' + bourbon //adds source map
             }
 
         ]

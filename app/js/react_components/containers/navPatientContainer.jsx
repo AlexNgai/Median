@@ -1,4 +1,5 @@
-var React = require('react');
+import React from 'react'
+import { browserHistory } from 'react-router'
 
 var PatientContainer = React.createClass({
 
@@ -69,13 +70,17 @@ var PatientContainer = React.createClass({
 
     componentDidMount: function(){
     	
- 
     }
 
 
 });
 
 var PatientListElement = React.createClass({
+
+	switchActivePatient: function(){
+		console.log("switching to patient");
+		browserHistory.push('/patient');
+	},
 
 	render: function(){
 
@@ -85,7 +90,7 @@ var PatientListElement = React.createClass({
 		}
 
 		return (
-			<div className={"mh-side-nav-channel" + ((this.props.isActive)?" active":"")}>
+			<div onClick={this.switchActivePatient} className={"mh-side-nav-channel" + ((this.props.isActive)?" active":"")}>
 				<span className="clickable channel-name">{this.props.data.name}</span>
 				{badge}
 			</div>

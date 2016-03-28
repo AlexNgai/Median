@@ -1,4 +1,5 @@
-var React = require('react');
+import React from 'react'
+import { browserHistory } from 'react-router'
 
 var Avatar = require('general/avatarGen.jsx');
 
@@ -89,6 +90,11 @@ var TeamContainer = React.createClass({
 
 var TeamListElement = React.createClass({
 
+	switchActiveTeamChat: function(){
+		console.log("switching to team chat");
+		browserHistory.push('/chat');
+	},
+
 	render: function(){
 
 		var badge;
@@ -97,7 +103,7 @@ var TeamListElement = React.createClass({
 		}
 
 		return (
-			<div className={"mh-side-nav-channel" + ((this.props.isActive)?" active":"")}>
+			<div onClick={this.switchActiveTeamChat} className={"mh-side-nav-channel" + ((this.props.isActive)?" active":"")}>
 				<Avatar size={35} name={this.props.data.name} circular={false} id={"nav-" + this.props.data.id} className="mh-side-nav-team-avatar"/>
 				<span className="clickable team-name">
 					<p>@{this.props.data.name}</p>

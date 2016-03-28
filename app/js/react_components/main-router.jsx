@@ -42,6 +42,9 @@ var MainRouter = React.createClass({
                     <Route path="chat/:channelID" 
                         component={ChatScreen}></Route>
 
+                    <Route path="patient" 
+                        component={PatientScreen}></Route>
+
                     <Route path="patient/:patientID" 
                         component={PatientScreen}></Route>
                
