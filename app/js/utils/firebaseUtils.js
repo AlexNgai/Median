@@ -14,7 +14,7 @@ FirebaseUtils.init = function(){
 		  
 		if (authData) 
 		{
-			console.log("User " + authData.uid + " is logged in with " + authData.provider);
+			console.log("User " + authData.uid + " is logged in with " + authData.provider, authData);
 		} 
 		else 
 		{
@@ -38,6 +38,11 @@ FirebaseUtils.authWithGooglePopup = function()
 	Fire.authWithOAuthPopup("google", authHandler);
 }
 
+FirebaseUtils.authWithFormInputs = function()
+{
+	console.log("auth with form inputs");
+}
+
 FirebaseUtils.logout = function(){
 	Fire.unauth();
 }
@@ -49,7 +54,7 @@ module.exports = FirebaseUtils;
 
 function authDataCallback(authData) {
   if (authData) {
-    console.log("User " + authData.uid + " is logged in with " + authData.provider);
+    console.log("User " + authData.uid + " is logged in with " + authData.provider, authData);
   } else {
     console.log("User is logged out");
   }
