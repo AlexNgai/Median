@@ -1,7 +1,8 @@
 import initialState from 'stores/initialState'
 
 import {
-	USER_SETDATA
+	USER_SETDATA,
+	USER_LOGOUT
 } from 'actions/userActions'
 
 var userReducer = function (state = initialState.user, action) {
@@ -12,8 +13,13 @@ var userReducer = function (state = initialState.user, action) {
     	case USER_SETDATA:
             console.log("set data", action.userData)
             return {
-            	name: action.userData.name
+            	name: action.userData.name,
+            	id: action.userData.id,
+            	profileImg: action.userData.profileImg
             };
+        case USER_LOGOUT:
+        	console.log("logout", initialState.user);
+        	return initialState.user;
 
         default:
             return state;

@@ -22,16 +22,12 @@ import MainRouter from 'main-router'
 
 import MainStore from 'stores/mainStore'
 
-import { user_setUserData } from 'actions/userActions.js'
-
 window.onload = function(){
 	
 	console.log("Welcome to Median!");
 	console.log("INITIAL STORE:", MainStore.getState());
 
 	FireUtils.init();
-
-	console.log("action test", user_setUserData);
 
 	//MainStore.dispatch(user_setUserData({name:'test',age:13}));
 
