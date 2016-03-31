@@ -1,6 +1,11 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 
+var FireUtils = require('utils/firebaseUtils.js');
+
+import { connect } from 'react-redux'
+import { user_setCurrentScreen } from 'actions/userActions.js'
+
 var PatientContainer = React.createClass({
 
 	getDefaultProps: function(){
@@ -33,7 +38,7 @@ var PatientContainer = React.createClass({
 				},
 
 			], //in sorted order?
-			currentChannel: 2,
+			currentChannel: 0,
 			createNewChannel: null,
 			changeChannel: null
 		}
@@ -56,7 +61,10 @@ var PatientContainer = React.createClass({
     	var rows = [];
     	for (var i=0; i<Math.min(this.props.channels.length,4); i++){
     		var channel = this.props.channels[i];
-    		rows.push(<PatientListElement key={channel.id} data={channel} isActive={this.props.currentChannel == channel.id} />)
+    		
+    		var isActive = (this.props.usernotif.currentActive.id == channel.id && this.props.usernotif.currentActive.screenType == "P");
+
+    		rows.push(<PatientListElement key={channel.id} data={channel} isActive={isActive} changeScreen={this.props.changeScreen}/>)
     	}
 
     	if (this.props.channels.length > 4){
@@ -79,7 +87,8 @@ var PatientListElement = React.createClass({
 
 	switchActivePatient: function(){
 		console.log("switching to patient");
-		browserHistory.push('/patient');
+		this.props.changeScreen("P", this.props.data.id);
+		browserHistory.push('/patient/' + this.props.data.id);
 	},
 
 	render: function(){
@@ -98,5 +107,17 @@ var PatientListElement = React.createClass({
 	}
 });
 
+var mapStateToProps = function(state){
+    return {channels2:state.patients, usernotif: state.user};
+};
 
-module.exports = PatientContainer;
+var mapDispatchToProps = function(dispatch){
+    return {
+        changeScreen: function(screenType, id){ dispatch(user_setCurrentScreen(screenType, id)); }
+    }
+};
+
+module.exports = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PatientContainer)

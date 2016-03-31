@@ -5,6 +5,8 @@ var isNewUser = true;
 var Fire = new Firebase("https://amber-inferno-4829.firebaseio.com");
 
 import { user_setUserData, user_logout } from 'actions/userActions.js'
+import { channel_setChannelData } from 'actions/channelActions.js'
+import { team_setData } from 'actions/teamActions.js'
 
 import MainStore from 'stores/mainStore'
 
@@ -19,6 +21,8 @@ FirebaseUtils.init = function(){
 		if (authData) 
 		{
 			console.log("User " + authData.uid + " is logged in with " + authData.provider, authData);
+			
+			FirebaseUtils.initAfterLogin();
 		} 
 		else 
 		{
@@ -68,8 +72,6 @@ FirebaseUtils.logout = function(){
 }
 
 
-module.exports = FirebaseUtils;
-
 
 
 function authDataCallback(authData) {
@@ -116,3 +118,65 @@ function getProfileImg(authData) {
 	    	return null;
 	}
 }
+
+
+//GET STORES (all of them for now)
+FirebaseUtils.getChannelInfo = function()
+{
+	var ref = new Firebase("https://amber-inferno-4829.firebaseio.com/channels");
+	// Attach an asynchronous callback to read the data at our posts reference
+	ref.on("value", function(snapshot) {
+	  console.log(snapshot.val());
+	}, function (errorObject) {
+	  console.log("The read failed: " + errorObject.code);
+	});
+}
+
+FirebaseUtils.initAfterLogin = function(){
+		
+	//console.log("postlogin init");
+
+	var channelRef = new Firebase("https://amber-inferno-4829.firebaseio.com/channels");
+	// Attach an asynchronous callback to read the data at our posts reference
+	
+	//Load channel data
+	channelRef.on("value", function(snapshot) {
+		var channelData = snapshot.val();
+		//console.log("channels", channelData);
+
+		MainStore.dispatch(channel_setChannelData( channelData ));
+
+	}, function (errorObject) {
+	  console.log("The read failed: " + errorObject.code);
+	});
+
+	//Load team information
+	var userRef = new Firebase("https://amber-inferno-4829.firebaseio.com/users");
+	userRef.on("value", function(snapshot) {
+		var userData = snapshot.val();
+		//console.log("users", userData);
+		MainStore.dispatch(team_setData( userData ));
+
+	}, function (errorObject) {
+	  console.log("The read failed: " + errorObject.code);
+	});
+
+
+}
+
+
+FirebaseUtils.writeChatMessage = function( channelID, messageData ){
+
+	var messageRef = new Firebase("https://amber-inferno-4829.firebaseio.com/channels/" + channelID + "/messages");
+	var newPostRef = messageRef.push();
+	newPostRef.set( messageData );
+
+}
+
+FirebaseUtils.receiveChatMessage = function(){
+
+}
+
+
+
+module.exports = FirebaseUtils;

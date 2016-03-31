@@ -6,6 +6,9 @@ require('layout/chatMessages.scss');
 
 var TimeUtils = require('utils/timeUtils.js');
 
+import { connect } from 'react-redux'
+import { user_setCurrentScreen } from 'actions/userActions.js'
+
 var ChatMessages = React.createClass({
 
 	getDefaultProps: function(){
@@ -118,6 +121,8 @@ var ChatMessages = React.createClass({
 
  	renderMsgGroups: function(){
 
+ 		//get current channel
+
 		var messages = this.props.messages;
 
 	    var tIncID = 0;      
@@ -200,7 +205,20 @@ var ChatMessages = React.createClass({
 
 });
 
-module.exports = ChatMessages;
+var mapStateToProps = function(state){
+    return {channels:state.channels, user: state.user};
+};
+
+/*var mapDispatchToProps = function(dispatch){
+    return {
+        changeScreen: function(screenType, id){ dispatch(user_setCurrentScreen(screenType, id)); }
+    }
+};*/
+
+module.exports = connect(
+  mapStateToProps
+)(ChatMessages)
+
 
 var ChatMessageGroup = React.createClass({
 	render: function(){

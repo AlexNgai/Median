@@ -21,17 +21,17 @@ var ChatScreen = React.createClass({
     render: function(){
         return (
         <div className="screen-content">
-        	<ChannelHeader />
+        	<ChannelHeader channelID={this.props.routeParams.channelID}/>
 
             <div className="channel-content-container">
             	<div className="channel-primary-content">
                     <div className="channel-content md-scroll">
                 	   
-                        <ChatMessages />
+                        <ChatMessages channelID={this.props.routeParams.channelID}/>
                     </div>
 
                     {/*FOOTER IS BOUND TO PRIMARY CONTENT*/}
-                    <ChannelFooter />
+                    <ChannelFooter channelID={this.props.routeParams.channelID}/>
                 </div>
 
                 {this.renderSideContent()}
@@ -43,7 +43,7 @@ var ChatScreen = React.createClass({
     },
 
     renderSideContent: function(){
-        console.log("has side content?", this.props.hasSideContent);
+        //console.log("has side content?", this.props.hasSideContent);
         if (this.props.hasSideContent){
             return (
                 <div className="channel-side-content md-scroll">

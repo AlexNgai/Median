@@ -22,14 +22,14 @@ nav
 
 	ul
 	{
-		a.active
+		a.active, a.active:hover
 		{
 			background-color: $primary-salmon;
 		}
 
 		a:hover
 		{
-			background-color: $salmon-muted;
+			background-color: #555;
 		}
 
 		/* button
@@ -49,6 +49,7 @@ nav
 			font-size: 18px;
 			color: $aqua-highlight;
 			font-weight: bold;
+
 		}
 	}
 

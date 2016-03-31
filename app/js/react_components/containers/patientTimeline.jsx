@@ -143,7 +143,7 @@ var PatientTimeline = React.createClass({
 		//start scrolled at the bottom
 		$(".channel-content").prop({ scrollTop: $(".channel-content").prop("scrollHeight") });
 
-		console.log("add timeline animations");
+		//console.log("add timeline animations");
 
 		var $timeline_block = $('.cd-timeline-block');
 

@@ -49,8 +49,8 @@ var LandingNav = React.createClass({
         var chatLink;
         if (this.props.user != null && this.props.user.id != null){
             chatLink = (
-                <li>
-                    <Link to="chat" activeClassName="active">
+                <li className="li-chat-link">
+                    <Link to="chat/general" activeClassName="active">
                         <div className="chat-link">
                             Median Chat &nbsp;&nbsp;<i className="fa fa-chevron-right"></i>
                         </div>

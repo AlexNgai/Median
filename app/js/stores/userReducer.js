@@ -2,7 +2,8 @@ import initialState from 'stores/initialState'
 
 import {
 	USER_SETDATA,
-	USER_LOGOUT
+	USER_LOGOUT,
+	USER_SET_CURRENT_SCREEN
 } from 'actions/userActions'
 
 var userReducer = function (state = initialState.user, action) {
@@ -11,15 +12,26 @@ var userReducer = function (state = initialState.user, action) {
     switch (action.type) {
         
     	case USER_SETDATA:
-            console.log("set data", action.userData)
-            return {
-            	name: action.userData.name,
-            	id: action.userData.id,
-            	profileImg: action.userData.profileImg
-            };
+            //console.log("set data", action.userData)
+            var newState = JSON.parse(JSON.stringify(state));
+        	newState.name = action.userData.name;
+            newState.id = action.userData.id;
+            newState.profileImg = action.userData.profileImg;
+
+            return newState;
+            
         case USER_LOGOUT:
         	console.log("logout", initialState.user);
         	return initialState.user;
+
+        case USER_SET_CURRENT_SCREEN:
+
+        	console.log("Changing screen", action.id);
+        	var newState = JSON.parse(JSON.stringify(state));
+        	newState.currentActive.screenType = action.screenType;
+        	newState.currentActive.id = action.id;
+
+        	return newState;
 
         default:
             return state;

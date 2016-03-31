@@ -5,6 +5,9 @@ require('layout/mainLayout.scss');
 
 var Sidebar = require('layout/sidebar.jsx');
 
+import { connect } from 'react-redux'
+import { user_setCurrentScreen } from 'actions/userActions.js'
+
 var MainLayout = React.createClass({
 
     getInitialState: function(){
@@ -19,10 +22,11 @@ var MainLayout = React.createClass({
 
             {this.renderBanner()}
           
-            <Sidebar />
+            <Sidebar changeScreen={this.changeScreen} user={this.props.user}/>
 
             <main>
-                {this.props.children}
+                {React.cloneElement(this.props.children, { changeScreen: this.changeScreen })}
+                
             </main>
         </div>
         );
@@ -37,6 +41,10 @@ var MainLayout = React.createClass({
                 </div>
             );
         }
+    },
+
+    changeScreen: function( screenType, id ){
+        console.log("Changing screen to ", screenType, id);
     },
 
     componentDidMount: function(){
@@ -56,4 +64,17 @@ var MainLayout = React.createClass({
 
 });
 
-module.exports = MainLayout;
+var mapStateToProps = function(state){
+    return {user: state.user};
+};
+
+var mapDispatchToProps = function(dispatch){
+    return {
+        changeScreen: function(screenType, id){ dispatch(user_setCurrentScreen(screenType, id)); }
+    }
+};
+
+module.exports = connect(
+    mapStateToProps,
+  mapDispatchToProps
+)(MainLayout)

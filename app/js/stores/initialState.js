@@ -5,7 +5,16 @@ module.exports = {
     user: {
         name: null,
         id: null,
-        profileImg: null
+        profileImg: null,
+
+        currentActive: {
+            screenType: "C",
+            id: "general"
+        }
+
+        /*notif: {},
+        patients: {},
+        patient: */
     },
 
     team: {
@@ -13,7 +22,7 @@ module.exports = {
     },
 
     channels: {
-
+        
     },
 
     patients: {

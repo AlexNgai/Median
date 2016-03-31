@@ -30,6 +30,15 @@ window.onload = function(){
 	FireUtils.init();
 
 	//MainStore.dispatch(user_setUserData({name:'test',age:13}));
+	/*FireUtils.writeChatMessage("general", {
+					id: 1,
+					body: "Lorem ipsum dolor sit amet, ut dolorem gloriatur pro, mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est, qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
+					date: 23523,
+					user: {
+						name: "Jser 1",
+						id: 1
+					}
+				});*/
 
 	render(
 	  <Provider store={MainStore}>
