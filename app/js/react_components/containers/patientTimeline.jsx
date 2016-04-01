@@ -8,6 +8,14 @@ var TimeUtils = require('utils/timeUtils.js');
 
 var scrollEvent;
 
+var PatientNote = require('modals/patientNote.jsx');
+var PatientFile = require('modals/patientFile.jsx');
+var PatientVitals = require('modals/patientVitals.jsx');
+var PatientDiagnosis = require('modals/patientDiagnosis.jsx');
+var PatientMedication = require('modals/patientMedication.jsx');
+
+import { connect } from 'react-redux'
+
 var PatientTimeline = React.createClass({
 
 	getDefaultProps: function(){
@@ -36,7 +44,17 @@ var PatientTimeline = React.createClass({
 		}
 	},
 
+	getInitialState: function(){
+		return {
+			modal: 0
+			//1 note 2 file 3 vitals 4 diagnosis 5 medication
+		};
+	},
+
     render: function(){
+
+    	var modal;
+    	if (this.state.modal) modal = this.renderModal();
 
         return (
         	<div>
@@ -45,24 +63,68 @@ var PatientTimeline = React.createClass({
 	    		</section>
 
 	    		<div className="event-btn-container">
-	    			<AddEventButton />
+	    			<AddEventButton activateModal={this.activateModal}/>
 	    		</div>
 	    		
+	    		{modal}
+
     		</div>
     	);
     },
 
  	renderTimelineEvents: function(){
 
- 		var timelineEvents = this.props.timelineEvents;
+ 		/*var timelineEvents = this.props.timelineEvents;
  		var rows = [];
 		for (var i=0; i<timelineEvents.length; i++){
 			rows.push (
 				<TimelineEvent key={i} data={timelineEvents[i]}/>
 			);
 		}
+		*/
+
+    	var patientID = this.props.patientID;
+    	var timeline = {};
+        if (patientID != null){
+            var patient = this.props.patients[patientID];
+            if (patient !== null && patient !== undefined){
+                timeline = patient.timeline;
+            }
+        }
+
+		var rows = [];
+		for (var tid in timeline){
+			rows.push(this.renderEvent( tid, timeline[tid]));
+			/*rows.push (
+				<TimelineEvent key={tid} data={timeline[tid]}/>
+			);*/
+		}
+
+		/*if (this.props.timeline == null || Object.keys(this.props.timeline).length == 0){
+			rows.push(
+				<div className="center-align no-timeline">Add a timeline event!</div>
+			);
+		}*/
 
 		return rows;
+	},
+
+	renderEvent: function( id, data ){
+		
+		switch(data.type){
+			case 1:
+				return (<TimelineEvent key={id} data={data}/>);
+			case 2:
+
+			case 3:
+
+			case 4:
+
+			case 5:
+
+			default:
+				return;
+		}
 	},
 
 	componentDidMount: function(){
@@ -97,12 +159,46 @@ var PatientTimeline = React.createClass({
 	componentWillUnmount: function(){
 		//verify that this works
 		scrollEvent.unbind();
+	},
+
+	activateModal: function( modalID ){
+		this.setState({modal: modalID});
+	},
+
+	renderModal: function(){
+		console.log("render modal", this.state.modal);
+
+		switch( this.state.modal ){
+			case 1: 
+				return <PatientNote patientID={this.props.patientID} closeModal={this.closeModal}/>;
+			case 2:
+				return <PatientFile patientID={this.props.patientID} closeModal={this.closeModal}/>;
+			case 3:
+				return <PatientVitals patientID={this.props.patientID} closeModal={this.closeModal}/>;
+			case 4:
+				return <PatientDiagnosis patientID={this.props.patientID} closeModal={this.closeModal}/>;
+			case 5:
+				return <PatientMedication patientID={this.props.patientID} closeModal={this.closeModal}/>;
+
+			default:
+				return;
+		}
+	},
+
+	closeModal: function(){
+		console.log("modal closed");
+		this.setState({modal: 0});
 	}
 
 });
 
-module.exports = PatientTimeline;
+var mapStateToProps = function(state){
+    return {patients:state.patients, user: state.user};
+};
 
+module.exports = connect(
+  mapStateToProps
+)(PatientTimeline)
 
 
 var TimelineEvent = React.createClass({
@@ -110,7 +206,7 @@ var TimelineEvent = React.createClass({
 	render: function(){
 		return (
 			<div className="cd-timeline-block cssanimations">
-		      	<div className="cd-timeline-img cd-picture">
+		      	<div className="cd-timeline-img cd-picture bounce-in">
 		        	<i className="fa fa-times"></i>
 		        	{/*<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-picture.svg" alt="Picture"/>*/}
 		      	</div>
@@ -143,15 +239,20 @@ var AddEventButton = React.createClass({
 			      	<i className="fa fa-plus"></i>
 			    </a>
 			    <ul>
-			      	<li><a className="btn-large btn-floating blue darken-1 waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Write a Note">
+			      	<li><a className="btn-large btn-floating blue darken-1 waves-effect waves-light tooltipped" onClick={this.addNote}
+			      		data-position="bottom" data-delay="50" data-tooltip="Write a Note">
 			      		<i className="fa fa-pencil"></i></a></li>
-			      	<li><a className="btn-large btn-floating yellow darken-1 waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Upload a File">
+			      	<li><a className="btn-large btn-floating yellow darken-1 waves-effect waves-light tooltipped" onClick={this.addFile}
+			      		ata-position="bottom" data-delay="50" data-tooltip="Upload a File">
 			      		<i className="fa fa-file-image-o"></i></a></li>
-			      	<li><a className="btn-large btn-floating green waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add Vital Signs">
+			      	<li><a className="btn-large btn-floating green waves-effect waves-light tooltipped" onClick={this.addVitals}
+			      		data-position="bottom" data-delay="50" data-tooltip="Add Vital Signs">
 			      		<i className="fa fa-heartbeat"></i></a></li>
-			      	<li><a className="btn-large btn-floating red waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add a Diagnosis">
+			      	<li><a className="btn-large btn-floating red waves-effect waves-light tooltipped" onClick={this.addDiagnosis}
+			      		data-position="bottom" data-delay="50" data-tooltip="Add a Diagnosis">
 			      		<i className="fa fa-stethoscope"></i></a></li>
-			      	<li><a className="btn-large btn-floating orange waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Record Medication">
+			      	<li><a className="btn-large btn-floating orange waves-effect waves-light tooltipped" onClick={this.addMedication}
+			      		data-position="bottom" data-delay="50" data-tooltip="Record Medication">
 			      		<i className="fa fa-medkit"></i></a></li>
 			    </ul>
 			</div>
@@ -161,6 +262,31 @@ var AddEventButton = React.createClass({
 	componentDidMount: function(){
 		
 		$('.tooltipped').tooltip({delay: 50});
+	},
+
+	addNote: function(){
+		console.log("adding note");
+		this.props.activateModal(1);
+	},
+
+	addFile: function(){
+		console.log("adding file");
+		this.props.activateModal(2);
+	},
+
+	addVitals: function(){
+		console.log("adding vitals");
+		this.props.activateModal(3);
+	},	
+
+	addDiagnosis: function(){
+		console.log("adding diagnosis");
+		this.props.activateModal(4);
+	},
+
+	addMedication: function(){
+		console.log("adding medication");
+		this.props.activateModal(5);
 	}
 
 });

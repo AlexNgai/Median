@@ -259,4 +259,12 @@ function initIdleStatus( id, userData ){
 }
 
 
+FirebaseUtils.addPatientTimelineEvent = function( patientID, timelineEvent ){
+
+	var messageRef = new Firebase("https://amber-inferno-4829.firebaseio.com/patients/" + patientID + "/timeline");
+	var newPostRef = messageRef.push();
+	newPostRef.set( timelineEvent );
+}
+
+
 module.exports = FirebaseUtils;

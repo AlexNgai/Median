@@ -27,7 +27,7 @@ var PatientScreen = React.createClass({
             	<div className="channel-primary-content patient-timeline-container">
                     <div className="channel-content md-scroll">
                 	   
-                        <PatientTimeline />
+                        <PatientTimeline patientID={this.props.routeParams.patientID}/>
                     </div>
 
                     {/*FOOTER IS BOUND TO PRIMARY CONTENT*/}
