@@ -115,13 +115,13 @@ var PatientTimeline = React.createClass({
 			case 1:
 				return (<TimelineEvent key={id} data={data}/>);
 			case 2:
-
+				return (<TimelineFileEvent key={id} data={data}/>);
 			case 3:
-
+				return (<TimelineVitalSignsEvent key={id} data={data}/>);
 			case 4:
-
+				return (<TimelineDiagnosisEvent key={id} data={data}/>);
 			case 5:
-
+				return (<TimelineMedicationEvent key={id} data={data}/>);
 			default:
 				return;
 		}
@@ -156,6 +156,10 @@ var PatientTimeline = React.createClass({
 		});
 	},
 
+	componentDidUpdate: function(){
+		$(".channel-content").prop({ scrollTop: $(".channel-content").prop("scrollHeight") });
+	},
+
 	componentWillUnmount: function(){
 		//verify that this works
 		scrollEvent.unbind();
@@ -170,15 +174,15 @@ var PatientTimeline = React.createClass({
 
 		switch( this.state.modal ){
 			case 1: 
-				return <PatientNote patientID={this.props.patientID} closeModal={this.closeModal}/>;
+				return <PatientNote patientID={this.props.patientID} closeModal={this.closeModal} user={this.props.user}/>;
 			case 2:
-				return <PatientFile patientID={this.props.patientID} closeModal={this.closeModal}/>;
+				return <PatientFile patientID={this.props.patientID} closeModal={this.closeModal} user={this.props.user}/>;
 			case 3:
-				return <PatientVitals patientID={this.props.patientID} closeModal={this.closeModal}/>;
+				return <PatientVitals patientID={this.props.patientID} closeModal={this.closeModal} user={this.props.user}/>;
 			case 4:
-				return <PatientDiagnosis patientID={this.props.patientID} closeModal={this.closeModal}/>;
+				return <PatientDiagnosis patientID={this.props.patientID} closeModal={this.closeModal} user={this.props.user}/>;
 			case 5:
-				return <PatientMedication patientID={this.props.patientID} closeModal={this.closeModal}/>;
+				return <PatientMedication patientID={this.props.patientID} closeModal={this.closeModal} user={this.props.user}/>;
 
 			default:
 				return;
@@ -200,28 +204,6 @@ module.exports = connect(
   mapStateToProps
 )(PatientTimeline)
 
-
-var TimelineEvent = React.createClass({
-
-	render: function(){
-		return (
-			<div className="cd-timeline-block cssanimations">
-		      	<div className="cd-timeline-img cd-picture bounce-in">
-		        	<i className="fa fa-times"></i>
-		        	{/*<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-picture.svg" alt="Picture"/>*/}
-		      	</div>
-
-		      	<div className="cd-timeline-content">
-			        <h2>Title of section 1</h2>
-			        <p>{this.props.data.body}</p>
-			        <a href="#0" className="cd-read-more">Read more</a>
-			        <span className="cd-date">Jan 14</span>
-		    	</div>
-		    </div>
-		);
-	}
-
-});
 
 var AddEventButton = React.createClass({
 
@@ -287,6 +269,186 @@ var AddEventButton = React.createClass({
 	addMedication: function(){
 		console.log("adding medication");
 		this.props.activateModal(5);
+	}
+
+});
+
+var TimelineEvent = React.createClass({
+
+	render: function(){
+		
+		var heading;
+		var body;
+		if (this.props.data.title){
+			heading = (<h2>{this.props.data.title}</h2>)
+		}
+
+		if (this.props.data.body){
+			body = (<p>{this.props.data.body}</p>)
+		}
+
+		return (
+			<div className="cd-timeline-block cssanimations">
+		      	<div className="cd-timeline-img cd-picture bounce-in tl-note">
+		        	<i className="fa fa-pencil"></i>
+		        	{/*<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-picture.svg" alt="Picture"/>*/}
+		      	</div>
+
+		      	<div className="cd-timeline-content">
+			       	{heading}
+			        {body}
+			        <span className="cd-date">{TimeUtils.MDFormat(this.props.data.date)}</span>
+		    	</div>
+		    </div>
+		);
+	}
+
+});
+
+var TimelineFileEvent = React.createClass({
+
+	render: function(){
+		
+		var img;
+		var description;
+		if (this.props.data.url){
+			img = (
+				<div className="tl-img-container">
+					<img className="materialboxed" src={this.props.data.url} />
+				</div>
+			);
+		}
+
+		if (this.props.data.description){
+			description = (<p>{this.props.data.description}</p>)
+		}
+
+		return (
+			<div className="cd-timeline-block cssanimations">
+		      	<div className="cd-timeline-img cd-picture bounce-in tl-file">
+		        	<i className="fa fa-file-image-o"></i>
+		        	{/*<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-picture.svg" alt="Picture"/>*/}
+		      	</div>
+
+		      	<div className="cd-timeline-content">
+			       	{img}
+			        {description}
+			        <span className="cd-date">{TimeUtils.MDFormat(this.props.data.date)}</span>
+		    	</div>
+		    </div>
+		);
+	},
+
+	componentDidMount: function(){
+		$('.materialboxed').materialbox();
+	}
+
+});
+
+var TimelineVitalSignsEvent = React.createClass({
+
+	render: function(){
+		
+		return (
+			<div className="cd-timeline-block cssanimations">
+		      	<div className="cd-timeline-img cd-picture bounce-in tl-vital">
+		        	<i className="fa fa-heartbeat"></i>
+		        	{/*<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-picture.svg" alt="Picture"/>*/}
+		      	</div>
+
+		      	<div className="cd-timeline-content">
+			       	<h2>Vital Signs</h2>
+
+			        <div className="vital-signs-table">
+			        	<div>
+			        		<i className="fa fa-heart"></i> Heart Rate: <span className="right val">{this.props.data.hr} bpm</span>
+			        	</div>
+			        	<div>
+			        		<i className="fa fa-tachometer"></i> Blood Pressure: <span className="right val">{this.props.data.bp1}/{this.props.data.bp2} mmHg</span>
+			        	</div>
+			        	<div>
+			        		<i className="fa fa-leaf"></i> Blood Oxygen: <span className="right val">{this.props.data.ox}%</span>
+			        	</div>
+			        	<div>
+			        		<i className="fa fa-fire"></i> Temperature: <span className="right val">{this.props.data.temp} °F</span>
+			        	</div>
+			        	<div>
+			        		<i className="fa fa-bolt"></i> Respiration Rate: <span className="right val">{this.props.data.resp} /min</span>
+			        	</div>
+			        </div>
+
+			        <span className="cd-date">{TimeUtils.MDFormat(this.props.data.date)}</span>
+		    	</div>
+		    </div>
+		);
+	},
+
+	componentDidMount: function(){
+		$('.materialboxed').materialbox();
+	}
+
+});
+
+var TimelineDiagnosisEvent = React.createClass({
+
+	render: function(){
+		
+		var heading;
+		var body;
+		if (this.props.data.title){
+			heading = (<h2>{this.props.data.title}</h2>)
+		}
+
+		if (this.props.data.body){
+			body = (<p>{this.props.data.body}</p>)
+		}
+
+		return (
+			<div className="cd-timeline-block cssanimations">
+		      	<div className="cd-timeline-img cd-picture bounce-in tl-diagnosis">
+		        	<i className="fa fa-stethoscope"></i>
+		        	{/*<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-picture.svg" alt="Picture"/>*/}
+		      	</div>
+
+		      	<div className="cd-timeline-content">
+			       	{heading}
+			        {body}
+			        <span className="cd-date">{TimeUtils.MDFormat(this.props.data.date)}</span>
+		    	</div>
+		    </div>
+		);
+	}
+
+});
+
+var TimelineMedicationEvent = React.createClass({
+
+	render: function(){
+		
+		var heading;
+		var body;
+		if (this.props.data.title){
+			heading = (<h2>{this.props.data.title}</h2>)
+		}
+
+		if (this.props.data.body){
+			body = (<p>{this.props.data.body}</p>)
+		}
+
+		return (
+			<div className="cd-timeline-block cssanimations">
+		      	<div className="cd-timeline-img cd-picture bounce-in tl-medication">
+		        	<i className="fa fa-medkit"></i>
+		        	{/*<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-picture.svg" alt="Picture"/>*/}
+		      	</div>
+
+		      	<div className="cd-timeline-content">
+			       	{heading}
+			        {body}
+			        <span className="cd-date">{TimeUtils.MDFormat(this.props.data.date)}</span>
+		    	</div>
+		    </div>
+		);
 	}
 
 });

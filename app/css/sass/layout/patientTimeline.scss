@@ -13,6 +13,12 @@ $color-4: #75ce66; // green
 $color-5: #f0ca45; // yellow
 
 
+$tl-blue: #1E88E5;
+$tl-yellow: #FDD835;
+$tl-green:#4CAF50;
+$tl-red:#F44336;
+$tl-orange:#FF9800;
+
 $S:     320px;   
 $M:     768px;     
 $L:     1170px;     
@@ -117,16 +123,24 @@ $L:     1170px;
 		color: white;
 	}
 
-	&.cd-picture {
-		background: $color-4;
+	&.tl-note {
+		background: $tl-blue;
 	}
 
-	&.cd-movie {
-		background: $color-2;
+	&.tl-file {
+		background: $tl-yellow;
 	}
 
-	&.cd-location {
-		background: $color-5;
+	&.tl-vital {
+		background: $tl-green;
+	}
+
+	&.tl-diagnosis {
+		background: $tl-red;
+	}
+
+	&.tl-medication {
+		background: $tl-orange;
 	}
 
 	@include MQ(L) {
@@ -217,6 +231,20 @@ $L:     1170px;
 		width: 0;
 		border: 7px solid transparent;
 		border-right: 7px solid $color-3;
+	}
+
+	.tl-img-container {
+		/* max-width: 200px; */
+
+		.materialboxed 
+		{
+			max-width: 200px;
+		}
+
+		.materialboxed.initialized 
+		{
+			max-width: 100%;
+		}
 	}
 
 	@include MQ(M) {
@@ -389,3 +417,17 @@ $L:     1170px;
 	background-color: $primary-periwinkle;
 	z-index: 5;
 } */
+
+.vital-signs-table{
+	background-color: $primary-periwinkle;
+	margin-top: 20px;
+	padding: 10px;
+	color: white;
+	line-height: 24px;
+	font-size: 18px;
+
+	.val 
+	{
+		color: $aqua-highlight;
+	}
+}

@@ -1,20 +1,41 @@
 import React from 'react'
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var FireUtils = require('utils/firebaseUtils.js');
 
 var PatientNote = React.createClass({
 
+	mixins: [LinkedStateMixin],
+
 	//close
+	getInitialState: function(){
+		return {
+			heading: '',
+			body: ''
+		};
+	},
 
 	render: function(){
 
 		//$('#modal1').openModal();
 
+		//valueLink={this.linkState('message')
+
 		return (
 			<div id="patient-note-modal" className="modal">
 			    <div className="modal-content">
 			      	<h4>Add a Note</h4>
-			      	<p>A bunch of text</p>
+			      	<br/>
+			      	
+			      	<div className="input-field">
+			      		{/*<label htmlFor="pn-heading">Heading</label>*/}
+			      		<input id="pn-heading" placeholder="Title" type="text" className="validate" valueLink={this.linkState('heading')}/>
+				    </div>
+
+				    <div className="input-field">
+			      		{/*<label htmlFor="pn-body">Note Body</label>*/}
+				    	<input id="pn-body" placeholder="Message" type="text" className="validate" valueLink={this.linkState('body')}/>
+				    </div>
 			    </div>
 			    <div className="modal-footer">
 			      	<a onClick={this.submit} className="btn modal-action waves-effect waves-green">Submit</a>
@@ -29,11 +50,12 @@ var PatientNote = React.createClass({
 
 		var eventData = {
 			type: 1,
-			body: "Lorem ipsum dolor sit amet, ut dolorem gloriatur pro, mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est, qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
+			title: this.state.heading,
+			body: this.state.body,
 			date: new Date().getTime(),
 			user: {
-				name: "Jser 1",
-				id: 1
+				name: this.props.user.name,
+				id: this.props.user.id
 			}
 		};
 

@@ -8,9 +8,9 @@ var ChannelHeader = React.createClass({
 	
     getDefaultProps: function(){
         return {
-            channelName: "channel",
+            channelName: "Channel Name",
             members: 1,
-            channelDescription: "description"
+            channelDescription: "Add a description"
         }
     },
 

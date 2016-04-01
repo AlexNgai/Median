@@ -10,6 +10,8 @@ var ChannelFooter = require('layout/channelFooter.jsx');
 
 var PatientTimeline = require('containers/patientTimeline.jsx');
 
+import { connect } from 'react-redux'
+
 var PatientScreen = React.createClass({
     
 	getDefaultProps: function(){
@@ -19,9 +21,24 @@ var PatientScreen = React.createClass({
     },
 
     render: function(){
+        
+        var patientID = this.props.routeParams.patientID;
+
+        var name;
+        var members;
+        var description;
+
+        if (patientID != null){
+            var channel = this.props.patients[patientID];
+            if (channel !== null && channel !== undefined){
+                name = channel.name;
+                members = 1;
+            }
+        }
+
         return (
         <div className="screen-content">
-        	<ChannelHeader />
+        	<ChannelHeader channelID={patientID} channelName={name} members={members} channelDescription={description}/>
 
             <div className="channel-content-container">
             	<div className="channel-primary-content patient-timeline-container">
@@ -61,4 +78,10 @@ var PatientScreen = React.createClass({
     
 });
 
-module.exports = PatientScreen;
+var mapStateToProps = function(state){
+    return {patients:state.patients, user: state.user};
+};
+
+module.exports = connect(
+  mapStateToProps
+)(PatientScreen)
