@@ -36,14 +36,14 @@ var MainRouter = React.createClass({
 
                 <Route component={MainLayout}>
                  
-                    <Route path="chat" 
-                        component={ChatScreen}></Route>
+                    {/*<Route path="chat" 
+                        component={ChatScreen}></Route>*/}
 
                     <Route path="chat/:channelID" 
                         component={ChatScreen}></Route>
 
-                    <Route path="patient" 
-                        component={PatientScreen}></Route>
+                    {/*<Route path="patient" 
+                        component={PatientScreen}></Route>*/}
 
                     <Route path="patient/:patientID" 
                         component={PatientScreen}></Route>

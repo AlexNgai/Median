@@ -31,80 +31,7 @@ var PatientTimeline = React.createClass({
 						name: "fwefer 1",
 						id: 2
 					}
-				},
-				{
-					id: 3,
-					body: "mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est. Omnesque tincidunt adipiscing nam ea.",
-					date: 23423,
-					user: {
-						name: "fwefer 1",
-						id: 2
-					}
-				},
-				{
-					id: 4,
-					body: " qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
-					date: 33423,
-					user: {
-						name: "fwefer 1",
-						id: 2
-					}
-				},
-				{
-					id: 5,
-					body: "mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est. Omnesque tincidunt adipiscing nam ea.",
-					date: 232524533,
-					user: {
-						name: "Jser 1",
-						id: 1
-					}
-				},
-				{
-					id: 6,
-					body: "Lorem ipsum dolor sit amet, ut dolorem gloriatur pro, mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est, qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
-					date: 23523,
-					user: {
-						name: "Jser 1",
-						id: 1
-					}
-				},
-				{
-					id: 7,
-					body: " qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
-					date: 22523,
-					user: {
-						name: "fwefer 1",
-						id: 2
-					}
-				},
-				{
-					id: 8,
-					body: "mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est. Omnesque tincidunt adipiscing nam ea.",
-					date: 23423,
-					user: {
-						name: "fwefer 1",
-						id: 2
-					}
-				},
-				{
-					id: 9,
-					body: " qualisque ocurreret ei his. Omnesque tincidunt adipiscing nam ea.",
-					date: 33423,
-					user: {
-						name: "fwefer 1",
-						id: 2
-					}
-				},
-				{
-					id: 10,
-					body: "mei verterem partiendo suavitate eu. Noluisse democritum cu nec. Quem quis comprehensam ex est. Omnesque tincidunt adipiscing nam ea.",
-					date: 232524533,
-					user: {
-						name: "Jser 1",
-						id: 1
-					}
 				}
-
 			]
 		}
 	},
@@ -216,13 +143,24 @@ var AddEventButton = React.createClass({
 			      	<i className="fa fa-plus"></i>
 			    </a>
 			    <ul>
-			      	<li><a className="btn-floating red"><i className="fa fa-plus"></i></a></li>
-			      	<li><a className="btn-floating yellow darken-1"><i className="fa fa-plus"></i></a></li>
-			      	<li><a className="btn-floating green"><i className="fa fa-plus"></i></a></li>
-			      	<li><a className="btn-floating blue"><i className="fa fa-plus"></i></a></li>
+			      	<li><a className="btn-large btn-floating blue darken-1 waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Write a Note">
+			      		<i className="fa fa-pencil"></i></a></li>
+			      	<li><a className="btn-large btn-floating yellow darken-1 waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Upload a File">
+			      		<i className="fa fa-file-image-o"></i></a></li>
+			      	<li><a className="btn-large btn-floating green waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add Vital Signs">
+			      		<i className="fa fa-heartbeat"></i></a></li>
+			      	<li><a className="btn-large btn-floating red waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add a Diagnosis">
+			      		<i className="fa fa-stethoscope"></i></a></li>
+			      	<li><a className="btn-large btn-floating orange waves-effect waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Record Medication">
+			      		<i className="fa fa-medkit"></i></a></li>
 			    </ul>
 			</div>
 		);
+	},
+
+	componentDidMount: function(){
+		
+		$('.tooltipped').tooltip({delay: 50});
 	}
 
 });

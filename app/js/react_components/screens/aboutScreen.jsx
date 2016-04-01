@@ -25,8 +25,7 @@ var AboutScreen = React.createClass({
 			            <div className="card-content">
 			            	<h2>About Us</h2>
 			              	<p>
-			              		I am a very simple card. I am good at containing small bits of information.
-			              		I am convenient because I require little markup to use effectively.
+			              		We're a team in Southern California bringing you the newest of Medical Workflow technologies.
 			              	</p>
 			            </div>
 

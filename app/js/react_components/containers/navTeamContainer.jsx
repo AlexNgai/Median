@@ -3,50 +3,14 @@ import { browserHistory } from 'react-router'
 
 var Avatar = require('general/avatarGen.jsx');
 
+import { connect } from 'react-redux'
+
 var TeamContainer = React.createClass({
 
 	getDefaultProps: function(){
 		return {
-			team: [
-				{
-					name: "Jser 1",
-					notif: 3,
-					id: 1,
-					status: 1
-				},
-				{
-					name: "Xser 2",
-					notif: 0,
-					id: 2,
-					status: 0
-				},
-				{
-					name: "Gser 3",
-					notif: 1,
-					id: 3,
-					status: 1
-				},
-				{
-					name: "Bser 4",
-					notif: 0,
-					id: 4,
-					status: 2
-				},
-				{
-					name: "XCser 4",
-					notif: 0,
-					id: 5,
-					status: 0
-				},
-				{
-					name: "Bser 4",
-					notif: 0,
-					id: 6,
-					status: 2
-				}
-
-			], //in sorted order?
-			currentChat: 2,
+			team: {}, //in sorted order?
+			currentChat: 0,
 			openNewChat: null,
 			changeChat: null
 		}
@@ -66,15 +30,16 @@ var TeamContainer = React.createClass({
 
     renderTeamChats: function(){
     	var rows = [];
-    	for (var i=0; i<Math.min(this.props.team.length,4); i++){
+    	for (var k=0; k<Math.min(Object.keys(this.props.team).length,4); k++){
+    		var i = Object.keys(this.props.team)[k];
     		var member = this.props.team[i];
-    		rows.push(<TeamListElement key={member.id} data={member} isActive={this.props.currentChat == member.id} />)
+    		rows.push(<TeamListElement key={i} data={member} id={i} isActive={this.props.currentChat == member.id} />)
     	}
 
-    	if (this.props.team.length > 4){
+    	if (Object.keys(this.props.team).length > 4){
 
     		//OPENS UP MODAL WITH COMPLETE LIST OF PATIENTS
-    		rows.push(<div key="more" className="nav-option-more">+{this.props.team.length-4} more</div>);
+    		rows.push(<div key="more" className="nav-option-more">+{Object.keys(this.props.team).length-4} more</div>);
     	}
 
     	return rows;
@@ -104,9 +69,9 @@ var TeamListElement = React.createClass({
 
 		return (
 			<div onClick={this.switchActiveTeamChat} className={"mh-side-nav-channel" + ((this.props.isActive)?" active":"")}>
-				<Avatar size={35} name={this.props.data.name} circular={false} id={"nav-" + this.props.data.id} className="mh-side-nav-team-avatar"/>
+				<Avatar size={35} name={this.props.data.name} circular={false} id={"nav-" + this.props.id} className="mh-side-nav-team-avatar"/>
 				<span className="clickable team-name">
-					<p>@{this.props.data.name}</p>
+					<p>{this.props.data.name}</p>
 					{this.renderStatusIcon(this.props.data.status)}
 				</span>
 				{badge}
@@ -138,6 +103,13 @@ var TeamListElement = React.createClass({
 	}
 });
 
+var mapStateToProps = function(state){
+    return {team:state.team, user: state.user};
+};
 
-module.exports = TeamContainer;
+module.exports = connect(
+  mapStateToProps
+)(TeamContainer)
+
+//module.exports = TeamContainer;
 

@@ -6,6 +6,7 @@ var FireUtils = require('utils/firebaseUtils.js');
 import { connect } from 'react-redux'
 import { user_setCurrentScreen } from 'actions/userActions.js'
 
+
 var PatientContainer = React.createClass({
 
 	getDefaultProps: function(){
@@ -44,33 +45,44 @@ var PatientContainer = React.createClass({
 		}
 	},
 
+	createNewPatient: function(){
+		console.log("open new creation modal");
+		
+	},
+
+	/*closeNewPatientModal: function(){
+		$('#create-patient-modal').closeModal();
+	},*/
+
     render: function(){
         
         return (
         	<div className="mh-side-nav-channel-container">
         		<div className="mh-side-nav-header">
         			<h3>PATIENT</h3>
-        			<i className="fa fa-plus clickable mh-side-nav-add-btn"></i>
+        			<i className="fa fa-plus clickable mh-side-nav-add-btn" onClick={this.createNewPatient}></i>
         		</div>
         		{this.renderChannels()}
+
     		</div>
     	);
     },
 
     renderChannels: function(){
     	var rows = [];
-    	for (var i=0; i<Math.min(this.props.channels.length,4); i++){
+    	for (var k=0; k<Math.min(Object.keys(this.props.channels).length,4); k++){
+    		var i = Object.keys(this.props.channels)[k];
     		var channel = this.props.channels[i];
     		
     		var isActive = (this.props.usernotif.currentActive.id == channel.id && this.props.usernotif.currentActive.screenType == "P");
 
-    		rows.push(<PatientListElement key={channel.id} data={channel} isActive={isActive} changeScreen={this.props.changeScreen}/>)
+    		rows.push(<PatientListElement key={i} data={channel} isActive={isActive} changeScreen={this.props.changeScreen}/>)
     	}
 
-    	if (this.props.channels.length > 4){
+    	if (Object.keys(this.props.channels).length > 4){
 
     		//OPENS UP MODAL WITH COMPLETE LIST OF PATIENTS
-    		rows.push(<div key="more" className="nav-option-more">+{this.props.channels.length-4} more</div>);
+    		rows.push(<div key="more" className="nav-option-more">+{Object.keys(this.props.channels).length-4} more</div>);
     	}
 
     	return rows;
@@ -108,7 +120,7 @@ var PatientListElement = React.createClass({
 });
 
 var mapStateToProps = function(state){
-    return {channels2:state.patients, usernotif: state.user};
+    return {channels:state.patients, usernotif: state.user};
 };
 
 var mapDispatchToProps = function(dispatch){

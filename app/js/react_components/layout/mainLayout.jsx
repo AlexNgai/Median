@@ -8,26 +8,44 @@ var Sidebar = require('layout/sidebar.jsx');
 import { connect } from 'react-redux'
 import { user_setCurrentScreen } from 'actions/userActions.js'
 
+var CreatePatientModal = require('modals/createPatientModal.jsx');
+
 var MainLayout = React.createClass({
 
     getInitialState: function(){
         return {
-            bannerActive: false
+            bannerActive: false,
+            createPatientModal: false
         };
     },
 
     render: function() {
+
+        var sidebarFunc = {
+            openCreatePatientModal: this.openCreatePatientModal
+        };
+
+        var createPatientModal;
+        if (this.state.createPatientModal){
+            createPatientModal = (
+                <CreatePatientModal closeModal={this.closeCreatePatientModal}/>
+            );
+        }
+
         return (
         <div className="app">
 
             {this.renderBanner()}
           
-            <Sidebar changeScreen={this.changeScreen} user={this.props.user}/>
+            <Sidebar changeScreen={this.changeScreen} user={this.props.user} func={sidebarFunc}/>
 
             <main>
                 {React.cloneElement(this.props.children, { changeScreen: this.changeScreen })}
                 
             </main>
+
+            {createPatientModal}
+
         </div>
         );
     },
@@ -37,10 +55,14 @@ var MainLayout = React.createClass({
             return (
                 <div id="banner">
                     Banner message This is a test banner message
-                    <a className="banner-close"><i className="fa fa-times"></i></a>
+                    <a className="banner-close" onClick={this.closeBanner}><i className="fa fa-times"></i></a>
                 </div>
             );
         }
+    },
+
+    closeBanner: function(){
+        this.setState({bannerActive: false});
     },
 
     changeScreen: function( screenType, id ){
@@ -60,6 +82,14 @@ var MainLayout = React.createClass({
             belowOrigin: false, // Displays dropdown below the button
             alignment: 'left' // Displays dropdown with edge aligned to the left of button
         });
+    },
+
+    openCreatePatientModal: function(){
+        this.setState({createPatientModal: true});
+    },
+
+    closeCreatePatientModal: function(){
+
     }
 
 });

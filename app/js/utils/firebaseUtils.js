@@ -7,6 +7,7 @@ var Fire = new Firebase("https://amber-inferno-4829.firebaseio.com");
 import { user_setUserData, user_logout } from 'actions/userActions.js'
 import { channel_setChannelData } from 'actions/channelActions.js'
 import { team_setData } from 'actions/teamActions.js'
+import { patient_setData } from 'actions/patientActions.js'
 
 import MainStore from 'stores/mainStore'
 
@@ -23,6 +24,15 @@ FirebaseUtils.init = function(){
 			console.log("User " + authData.uid + " is logged in with " + authData.provider, authData);
 			
 			FirebaseUtils.initAfterLogin();
+
+			var userDat =
+			{
+    			name: getName(authData),
+    			id: authData.uid,
+    			profileImg: getProfileImg(authData)
+        	};
+
+			initIdleStatus(authData.uid, userDat);
 		} 
 		else 
 		{
@@ -161,7 +171,16 @@ FirebaseUtils.initAfterLogin = function(){
 	  console.log("The read failed: " + errorObject.code);
 	});
 
+	//Load patient information
+	var patientRef = new Firebase("https://amber-inferno-4829.firebaseio.com/patients");
+	patientRef.on("value", function(snapshot) {
+		var patientData = snapshot.val();
+		//console.log("users", userData);
+		MainStore.dispatch(patient_setData( patientData ));
 
+	}, function (errorObject) {
+	  console.log("The read failed: " + errorObject.code);
+	});
 }
 
 
@@ -177,6 +196,67 @@ FirebaseUtils.receiveChatMessage = function(){
 
 }
 
+/*FirebaseUtils.subscribeChatMsgAdded = function( channelID ){
+	
+	console.log("subscribing to ", "https://amber-inferno-4829.firebaseio.com/channels/" + channelID + "/messages");
+
+	var ref = new Firebase("https://amber-inferno-4829.firebaseio.com/channels/" + channelID + "/messages");
+
+	ref.on("child_added", function(snapshot, prevChildKey) {
+	  	var newPost = snapshot.val();
+	  	console.log("new post from ", channelID, newPost);
+	});
+}*/
+
+var currentStatus = 1;
+
+function initIdleStatus( id, userData ){
+
+	var UserRef = new Firebase("https://amber-inferno-4829.firebaseio.com/users/" + id);
+
+	setUserStatus(currentStatus);
+
+	UserRef.onDisconnect( function(){setUserStatus(0)});
+	/*UserRef.on("value", function(isOnline) {
+		if (isOnline.val()) {
+		  // If we lose our internet connection, we want ourselves removed from the list.
+		  UserRef.onDisconnect( function(){setUserStatus(0)})
+
+		  // Set our initial online status.
+		  setUserStatus(currentStatus);
+		}
+		else {
+		  setUserStatus(currentStatus);
+		}
+	});
+*/
+	// A helper function to let us set our own state.
+	function setUserStatus(status) {
+	// Set our status in the list of online users.
+		
+		//var StatusRef = new Firebase("https://amber-inferno-4829.firebaseio.com/users/" + id + "/status");
+		currentStatus = status;
+
+		var ud = userData;
+		ud['status'] = status;
+
+		UserRef.set(ud);
+	}
+
+	// Use idle/away/back events created by idle.js to update our status information.
+	document.onIdle = function () {
+		setUserStatus(2);
+	}
+	document.onAway = function () {
+		setUserStatus(2);
+	}
+	document.onBack = function (isIdle, isAway) {
+		setUserStatus(1);
+	}
+
+	//document.setIdleTimeout(60000);
+	//document.setAwayTimeout(60000);
+}
 
 
 module.exports = FirebaseUtils;

@@ -35,8 +35,7 @@ var ChannelContainer = React.createClass({
 	},
 
     render: function(){
-        
-console.log("rerendering channel nav", this.props);
+      
 
         return (
         	<div className="mh-side-nav-channel-container">
@@ -51,7 +50,6 @@ console.log("rerendering channel nav", this.props);
 
     renderChannels: function(){
     	var rows = [];
-    	console.log("channels", this.props.channels);
     	for (var channelKey in this.props.channels){
     		var channel = this.props.channels[channelKey];
     		

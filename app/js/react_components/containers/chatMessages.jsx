@@ -122,14 +122,31 @@ var ChatMessages = React.createClass({
  	renderMsgGroups: function(){
 
  		//get current channel
+		var channel = this.props.channels[this.props.channelID];
 
-		var messages = this.props.messages;
+		if (channel === null || channel === undefined){
+			//not yet initialized
+			return;
+		} 
+
+		var messages = channel.messages;
+		console.log("mess", messages);
+
+		if (messages === null || messages === undefined){
+			return (
+				<div>
+					This channel does not yet have any messages. 
+				</div>
+			);
+		}
+
+		var messageKeys = Object.keys(messages);
 
 	    var tIncID = 0;      
 	    var rows = [];
 	    
-	    if (messages.length > 0){
-	    	rows.push( this.renderDateDivider(messages[0].date, tIncID) );
+	    if (messageKeys.length > 0){
+	    	rows.push( this.renderDateDivider(messages[messageKeys[0]].date, tIncID) );
 	    	tIncID++;
 	    }
 
@@ -137,10 +154,11 @@ var ChatMessages = React.createClass({
 	    var msgSendDate;
 	    var msgSenderName;
 	    var msgArr = [];
-	    if (messages.length > 0)
+	    if (messageKeys.length > 0)
 	    {
-	      	for (var i=0; i<messages.length; i++)
+	      	for (var k=0; k<messageKeys.length; k++)
 	      	{
+	      		var i = messageKeys[k];
 
 		        if (msgArr.length == 0)
 		        {
@@ -201,6 +219,14 @@ var ChatMessages = React.createClass({
 	            messages={msgArr} key={key} sender={msgSenderName} senderID={msgSender}
 	            sendDate={msgSendDate} id={key} />
 		);
+	},
+
+	componentDidUpdate: function(){
+
+		//start scrolled at the bottom
+		$(".channel-content").prop({ scrollTop: $(".channel-content").prop("scrollHeight") });
+	
+		console.log("updated component");
 	}
 
 });
