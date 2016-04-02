@@ -1,7 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router'
 
+import { connect } from 'react-redux'
+
 require('layout/landingLayout.scss');
+
+var Avatar = require('general/avatarGen.jsx');
 
 var LandingLayout = React.createClass({
 
@@ -21,7 +25,7 @@ var LandingLayout = React.createClass({
     },
 
     renderNav: function(){
-        return (<LandingNav />);
+        return (<LandingNav user={this.props.user}/>);
     },
 
     renderFooter: function(){
@@ -30,11 +34,31 @@ var LandingLayout = React.createClass({
 
 });
 
-module.exports = LandingLayout;
+var mapStateToProps = function(state){
+    return {user:state.user};
+};
+
+module.exports = connect(
+  mapStateToProps
+)(LandingLayout)
 
 var LandingNav = React.createClass({
 
     render: function(){
+
+        var chatLink;
+        if (this.props.user != null && this.props.user.id != null){
+            chatLink = (
+                <li className="li-chat-link">
+                    <Link to="chat/general" activeClassName="active">
+                        <div className="chat-link">
+                            Median Chat &nbsp;&nbsp;<i className="fa fa-chevron-right"></i>
+                        </div>
+                    </Link>
+                </li>
+            );
+        }
+
         return (
             <header className="landing">
                 <nav>
@@ -45,10 +69,13 @@ var LandingNav = React.createClass({
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li><Link to="/" activeClassName="active">Home</Link></li>
                             <li><Link to="about" activeClassName="active">About</Link></li>
-                            <li><Link to="signup" activeClassName="active">Signup</Link></li>
 
-                            <li><Link to="chat" activeClassName="active">Chat</Link></li>
+                            <li><Link to="signup" activeClassName="active">Login</Link></li>
+
+                            {chatLink}
                         </ul>
+
+
                     </div>
                 </nav>
             </header>
@@ -62,7 +89,7 @@ var LandingFooter = React.createClass({
     render: function(){
         return (
             <footer className="landing page-footer">
-                <div className="container">
+                {/*<div className="container">
                     <div className="row">
                         <div className="col l6 s12">
                             <h5 className="white-text">Footer Content</h5>
@@ -78,11 +105,12 @@ var LandingFooter = React.createClass({
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>*/}
                 <div className="footer-copyright">
                     <div className="container">
-                        © 2014 Copyright Text
-                        <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
+                        © 2016 Median
+                        <img className="right" src="img/shuffle-logo_sm.png"/>
+                        
                     </div>
                 </div>
             </footer>
@@ -90,3 +118,4 @@ var LandingFooter = React.createClass({
     }
 
 });
+

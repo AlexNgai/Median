@@ -43,12 +43,12 @@ var Sidebar = React.createClass({
                     <div className="mh-side-nav-content md-scroll">
 
                         {/*CHANNEL LIST*/}
-                        <ChannelContainer />
+                        <ChannelContainer/>
 
                         {/*PATIENT LIST*/}
-                        <PatientContainer />
+                        <PatientContainer/>
 
-                        <TeamContainer />
+                        <TeamContainer/>
                         
 
                         {/*TEAM LIST*/}
@@ -65,14 +65,15 @@ var Sidebar = React.createClass({
 
                     <div className="mh-side-nav-footer">
                         <div className="mh-nav-footer-profile">
-                            <Avatar size={40} name="Alex Ngai" circular={true} className="mh-nav-footer-avatar" id="me"/>
+                            <Avatar size={40} name={this.props.user.name} circular={true} 
+                                className="mh-nav-footer-avatar" id="me" />
                             <span className="mh-nav-footer-username">
-                                Alex Ngai
+                                {this.props.user.name}
                             </span>
-                            <button id="mh-nav-footer-dropdown-btn" className="mh-nav-footer-dropdown browser-default dropdown-button"
+                            {/*<button id="mh-nav-footer-dropdown-btn" className="mh-nav-footer-dropdown browser-default dropdown-button"
                                 data-activates='mh-nav-footer-dropdown' >
                                 <i className="fa fa-chevron-up"></i>
-                            </button>
+                            </button>*/}
                         </div>
                     </div>
 

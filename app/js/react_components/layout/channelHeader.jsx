@@ -2,9 +2,24 @@ var React = require('react');
 
 require('layout/channelHeader.scss');
 
+import { connect } from 'react-redux'
+
 var ChannelHeader = React.createClass({
 	
+    getDefaultProps: function(){
+        return {
+            channelName: "Channel Name",
+            members: 1,
+            channelDescription: "Add a description"
+        }
+    },
+
     render: function(){
+
+        var name = this.props.channelName;
+        var members = this.props.members + " member" + ((this.props.members > 1)?"s":"");
+        var description = this.props.channelDescription;
+
         return (
 
         	<div className="channel-header">
@@ -14,12 +29,12 @@ var ChannelHeader = React.createClass({
         		<div className="channel-messages-header">
 
         			<div className="channel-title">
-        				<h2 className="channel-name">#general2</h2>
+        				<h2 className="channel-name">#{name}</h2>
 
         				<div className="channel-info">
-        					<span>1 member</span>
+        					<span>{members}</span>
         					<span className="topic-divider">|</span>
-        					<span>Description string</span>
+        					<span>{description}</span>
         				</div>
         			</div>
 
@@ -80,3 +95,4 @@ var ChannelHeader = React.createClass({
 });
 
 module.exports = ChannelHeader;
+

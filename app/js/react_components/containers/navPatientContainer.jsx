@@ -1,6 +1,12 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 
+var FireUtils = require('utils/firebaseUtils.js');
+
+import { connect } from 'react-redux'
+import { user_setCurrentScreen } from 'actions/userActions.js'
+
+
 var PatientContainer = React.createClass({
 
 	getDefaultProps: function(){
@@ -33,11 +39,20 @@ var PatientContainer = React.createClass({
 				},
 
 			], //in sorted order?
-			currentChannel: 2,
+			currentChannel: 0,
 			createNewChannel: null,
 			changeChannel: null
 		}
 	},
+
+	createNewPatient: function(){
+		console.log("open new creation modal");
+		
+	},
+
+	/*closeNewPatientModal: function(){
+		$('#create-patient-modal').closeModal();
+	},*/
 
     render: function(){
         
@@ -45,24 +60,29 @@ var PatientContainer = React.createClass({
         	<div className="mh-side-nav-channel-container">
         		<div className="mh-side-nav-header">
         			<h3>PATIENT</h3>
-        			<i className="fa fa-plus clickable mh-side-nav-add-btn"></i>
+        			<i className="fa fa-plus clickable mh-side-nav-add-btn" onClick={this.createNewPatient}></i>
         		</div>
         		{this.renderChannels()}
+
     		</div>
     	);
     },
 
     renderChannels: function(){
     	var rows = [];
-    	for (var i=0; i<Math.min(this.props.channels.length,4); i++){
+    	for (var k=0; k<Math.min(Object.keys(this.props.channels).length,4); k++){
+    		var i = Object.keys(this.props.channels)[k];
     		var channel = this.props.channels[i];
-    		rows.push(<PatientListElement key={channel.id} data={channel} isActive={this.props.currentChannel == channel.id} />)
+    		
+    		var isActive = (this.props.usernotif.currentActive.id == channel.id && this.props.usernotif.currentActive.screenType == "P");
+
+    		rows.push(<PatientListElement key={i} data={channel} isActive={isActive} changeScreen={this.props.changeScreen}/>)
     	}
 
-    	if (this.props.channels.length > 4){
+    	if (Object.keys(this.props.channels).length > 4){
 
     		//OPENS UP MODAL WITH COMPLETE LIST OF PATIENTS
-    		rows.push(<div key="more" className="nav-option-more">+{this.props.channels.length-4} more</div>);
+    		rows.push(<div key="more" className="nav-option-more">+{Object.keys(this.props.channels).length-4} more</div>);
     	}
 
     	return rows;
@@ -79,7 +99,8 @@ var PatientListElement = React.createClass({
 
 	switchActivePatient: function(){
 		console.log("switching to patient");
-		browserHistory.push('/patient');
+		this.props.changeScreen("P", this.props.data.id);
+		browserHistory.push('/patient/' + this.props.data.id);
 	},
 
 	render: function(){
@@ -98,5 +119,17 @@ var PatientListElement = React.createClass({
 	}
 });
 
+var mapStateToProps = function(state){
+    return {channels:state.patients, usernotif: state.user};
+};
 
-module.exports = PatientContainer;
+var mapDispatchToProps = function(dispatch){
+    return {
+        changeScreen: function(screenType, id){ dispatch(user_setCurrentScreen(screenType, id)); }
+    }
+};
+
+module.exports = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PatientContainer)

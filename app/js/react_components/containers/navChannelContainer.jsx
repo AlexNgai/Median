@@ -1,6 +1,11 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 
+var FireUtils = require('utils/firebaseUtils.js');
+
+import { connect } from 'react-redux'
+import { user_setCurrentScreen } from 'actions/userActions.js'
+
 var ChannelContainer = React.createClass({
 
 	getDefaultProps: function(){
@@ -23,14 +28,15 @@ var ChannelContainer = React.createClass({
 				},
 
 			], //in sorted order?
-			currentChannel: 2,
+			currentChannel: 0,
 			createNewChannel: null,
 			changeChannel: null
 		}
 	},
 
     render: function(){
-        
+      
+
         return (
         	<div className="mh-side-nav-channel-container">
         		<div className="mh-side-nav-header">
@@ -44,23 +50,26 @@ var ChannelContainer = React.createClass({
 
     renderChannels: function(){
     	var rows = [];
-    	for (var i=0; i<Math.min(this.props.channels.length,4); i++){
-    		var channel = this.props.channels[i];
-    		rows.push(<ChannelListElement key={channel.id} data={channel} isActive={this.props.currentChannel == channel.id} />)
+    	for (var channelKey in this.props.channels){
+    		var channel = this.props.channels[channelKey];
+    		
+    		var isActive = (this.props.usernotif.currentActive.id == channel.name && this.props.usernotif.currentActive.screenType == "C");
+
+    		rows.push(<ChannelListElement key={channel.name} data={channel} 
+    			isActive={this.props.usernotif.currentActive.id == channel.name} changeScreen={this.props.changeScreen}/>)
     	}
 
-    	if (this.props.channels.length > 4){
+    	if (Object.keys(this.props.channels).length > 4){
 
     		//OPENS UP MODAL WITH COMPLETE LIST OF PATIENTS
-    		rows.push(<div key="more" className="nav-option-more">+{this.props.channels.length-4} more</div>);
+    		rows.push(<div key="more" className="nav-option-more">+{Object.keys(this.props.channels).length-4} more</div>);
     	}
 
     	return rows;
     },
 
     componentDidMount: function(){
-    	
- 
+	    //change current channel?
     }
 
 
@@ -70,7 +79,8 @@ var ChannelListElement = React.createClass({
 
 	switchActiveChannel: function(){
 		console.log("switching to channel");
-		browserHistory.push('/chat');
+		this.props.changeScreen("C", this.props.data.name);
+		browserHistory.push('/chat/' + this.props.data.name);
 	},
 
 	render: function(){
@@ -89,6 +99,19 @@ var ChannelListElement = React.createClass({
 	}
 });
 
+var mapStateToProps = function(state){
+    return {channels:state.channels, usernotif: state.user};
+};
 
-module.exports = ChannelContainer;
+var mapDispatchToProps = function(dispatch){
+    return {
+        changeScreen: function(screenType, id){ dispatch(user_setCurrentScreen(screenType, id)); }
+    }
+};
+
+module.exports = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChannelContainer)
+
 

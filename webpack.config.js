@@ -22,7 +22,7 @@ module.exports = {
     watch: !PROD,
     entry: {
         //test: "./app/js/test.js"
-        median: "./app/js/appEntry.js"
+        median: "./app/js/appEntry.jsx"
     },
     output: {
         //path: __dirname + "/app/js/build",

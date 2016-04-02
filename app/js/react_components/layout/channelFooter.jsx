@@ -2,8 +2,17 @@ var React = require('react');
 
 require('layout/channelFooter.scss');
 
+import FireUtils from 'utils/firebaseUtils'
+import { connect } from 'react-redux'
+
 var ChannelFooter = React.createClass({
 	
+    getInitialState: function(){
+        return {
+            message: ''
+        }
+    },
+
     render: function(){
         return (
 
@@ -17,7 +26,8 @@ var ChannelFooter = React.createClass({
                         </a>
                     </div>
 
-                    <textarea id="footer-textarea" placeholder="Type a message..."/>
+                    <textarea id="footer-textarea" placeholder="Type a message..." 
+                        onChange={this.changeChatMsg} value={this.state.message} onKeyPress={this.changeChatKey}/>
 
                     {/*<div className="footer-btn-container">
                                             <a className="footer-btn waves-effect waves-dark">
@@ -38,6 +48,36 @@ var ChannelFooter = React.createClass({
     	);
     },
 
+    changeChatMsg: function( e ){
+
+        if (e.target.value == '\n'){
+            return;
+        }
+
+        this.setState({message : e.target.value});
+    },
+
+    changeChatKey: function( e ){
+        //console.log("Key", e.key, e.target.value);
+        if (e.key === 'Enter') {
+            //console.log('do validate', this.state.message);
+            this.setState({message: ''});
+
+            //submit message
+            var msgData = {
+                id: 2,
+                body: this.state.message,
+                date: new Date().getTime(),
+                user: {
+                    name: this.props.user.name,
+                    id: this.props.user.id
+                }
+            };
+
+            FireUtils.writeChatMessage( this.props.channelID, msgData);
+        }
+    },
+ 
     componentDidMount: function(){
 
         $('#chat-footer-dropdown-btn').dropdown({
@@ -71,4 +111,10 @@ var ChannelFooter = React.createClass({
     
 });
 
-module.exports = ChannelFooter;
+var mapStateToProps = function(state){
+    return {user: state.user};
+};
+
+module.exports = connect(
+    mapStateToProps
+)(ChannelFooter)

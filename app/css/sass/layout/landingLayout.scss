@@ -7,7 +7,7 @@
 
 .app-landing 
 { 
-  	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), url(#{$assetPath}/pug-min.jpg) no-repeat center center fixed; 
+  	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 100%), url(#{$assetPath}/pug_sm.jpg) no-repeat center center fixed;  
   	background-size: cover;
   	display: flex;
     min-height: 100vh;
@@ -17,13 +17,39 @@
 nav 
 {
 	box-shadow: none;
-	background: none;
+	/* background: none; */
+	background: $primary-ash-blue;
 
 	ul
 	{
-		a.active
+		a.active, a.active:hover
 		{
 			background-color: $primary-salmon;
+		}
+
+		a:hover
+		{
+			background-color: #555;
+		}
+
+		/* button
+		{
+			border-radius: 50%;
+			background-color: $primary-salmon;
+			border: none;
+			height:30px;
+
+			&:hover
+			{
+				background-color: $salmon-muted;
+			}
+		} */
+
+		.chat-link{
+			font-size: 18px;
+			color: $aqua-highlight;
+			font-weight: bold;
+
 		}
 	}
 
@@ -35,11 +61,19 @@ nav
 
 footer.page-footer
 {
+	padding-top: 0px;
 	background-color: rgba(0,0,0,.3);
 
 	.footer-copyright
 	{
-		background-color: rgba(0,0,0,.5);
+		/* background-color: rgba(0,0,0,.5); */
+		background-color: $primary-ash-blue;
+
+		img 
+		{
+			max-height: 40px;
+			margin: 5px 0px;
+		}
 	}
 }
 
@@ -48,7 +82,7 @@ footer.page-footer
 	font-family: $font-header;
 }
 
-$s: 10px;
+$s: 8px;
 
 .welcome-content
 {
@@ -57,7 +91,7 @@ $s: 10px;
 	h2
 	{
 		margin-bottom: 20px;
-		font-size: 40px;
+		font-size: 34px;
 	}
 
 	.start-button {
@@ -70,7 +104,7 @@ $s: 10px;
 		position: relative;
 		overflow: hidden;
 		color: white;
-		line-height: 80px;
+		line-height: 64px;
 
 		&:before {
 			content: '';
@@ -84,7 +118,7 @@ $s: 10px;
 		&:after {
 			content: attr(data-word);
 			color: white;
-			font-size: 2em;
+			font-size: 1.5em;
 			position: relative;
 			z-index: 100;
 			transition: all 200ms ease;
@@ -93,7 +127,7 @@ $s: 10px;
 
 		&:hover {
 			&:after {
-				font-size: 2.2em;
+				font-size: 2em;
 			}
 			&:before {
 				transform: translate($s*-20,$s*-40) rotate(130deg);
@@ -104,12 +138,20 @@ $s: 10px;
 
 .about-content
 {
+	max-width: 500px;
 	color: white;
 	width: 100%;
+	margin: 10px auto;
+	
 	h2
 	{
 		margin-bottom: 20px;
 		font-size: 40px;
+	}
+
+	p{
+		font-size: 20px;
+		line-height: 24px;
 	}
 
 }
