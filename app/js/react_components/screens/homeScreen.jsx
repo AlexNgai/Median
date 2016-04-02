@@ -11,7 +11,7 @@ var HomeScreen = React.createClass({
         	<div className="row">
 	        	<div className="col s8 offset-s2">
 	        		<h2 className="center-align">
-	        			A messaging app for Narrative Medicine!
+	        			A messaging app for centralized Narrative Communication!
 	        		</h2>
 	        	</div>
         	</div>
